@@ -1,0 +1,42 @@
+language: node_js #使用Node语言环境
+node_js: stable #安装稳定版Node
+
+sudo: false
+
+#cache 启用缓存，加快构建速度
+cache:
+  directories:
+    - "node_modules"
+
+notifications: #启用通知
+  email:
+    recipients:
+      - im.grootfish@live.com #接收构建消息的邮件 不需要可设置为false
+    on_success: change #部署成功时，可设置alway never change
+    on_failure: always #部署失败时，同上
+
+# S: Build Lifecycle
+install:
+  - npm install  #安装依赖
+
+before_script:
+  - export TZ='Asia/Shanghai' #设置时区
+  - npm install -g gulp  #全局安装Gulp
+  - chmod +x _travis.sh  #授权脚本执行权限
+
+script:
+  - hexo clean && hexo g #清除缓存并生成静态文件
+  - gulp #执行gulp任务
+
+after_success: #执行成功时(以后扩展功能使用)
+
+after_script:
+  - ./_travis.sh #执行部署脚本
+# E: Build LifeCycle
+
+branches:
+  only:
+    - hexo #需要监听部署的分支
+env:
+ global:
+   - GH_REF: git@github.com:grootfish/grootfish.github.io.git #更改为自己git地址
