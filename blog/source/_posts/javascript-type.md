@@ -53,6 +53,7 @@ new Number(1).constructor == Number; //true
   ```
 - null 和 undefinde 是无效的对象，没有constructor
 - 函数的 constructor 是不稳定的，自定义对象，重写 prototype 后，原来的 constructor 引用丢失， constructor 会默认 Object
+
 ```javascript
 	funciotn F(){}
 	F.prototype = {a:'xxxx'}
