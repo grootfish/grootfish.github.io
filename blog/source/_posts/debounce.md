@@ -1,14 +1,11 @@
 ---
-title: debounce
+title: 函数节流和函数防抖
 tags: []
 comments: true    // 是否开启评论
 date: 2018-11-02 14:55:25
 description:
 ---
 
-## 函数节流和函数防抖
-
----
 
 ### 什么是throttle 和 debounce
 ---
