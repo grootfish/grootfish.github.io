@@ -1,6 +1,6 @@
 ---
 title: 函数节流和函数防抖
-tags: []
+tags: [javascript]
 comments: true    // 是否开启评论
 date: 2018-11-02 14:55:25
 description:
