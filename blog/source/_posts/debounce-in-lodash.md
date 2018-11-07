@@ -93,7 +93,7 @@ function debounce(func, wait, leading) {
 }
 ```
 ## lodash 的 debounce 实现
-上面的代码已经比较完善了了，下面来看下 lodash 中的代码实现
+上面的代码已经比较完善了，下面来看下 lodash 中的代码实现
 ```javascript
 function debounce(func, wait, options) {
     let lastArgs,
