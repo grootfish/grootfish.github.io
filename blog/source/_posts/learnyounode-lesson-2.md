@@ -5,7 +5,9 @@ date: 2018-03-14 16:41:43
 description: learnyounode 学习笔记——Lesson 2-Baby Steps
 ---
 
-### 课程目标:
+# learnyounode Lesson 2
+
+## 课程目标
 
 ```javascript
 Write a program that accepts one or more numbers as command-line arguments
@@ -13,7 +15,7 @@ and prints the sum of those numbers to the console (stdout).
 
 ```
 
-### 课程提示:
+## 课程提示
 
 ```javascript
 You can access command-line arguments via the global process object. The
@@ -50,38 +52,38 @@ You can access command-line arguments via the global process object. The
   environment that learnyounode sets up for each exercise.
 ```
 
-### My Solution:
+## My Solution
 
 ```javascript
 const arr = process.argv.slice(2);
-const sum = (stdin,std)=>{
-   return stdin+Number(std);
-}
-const result = arr.reduce(sum,0);
+const sum = (stdin, std) => {
+  return stdin + Number(std);
+};
+const result = arr.reduce(sum, 0);
 console.log(result);
 ```
 
-### Officical Solution:
+### Officical Solution
 
 ```javascript
-var result = 0
+var result = 0;
 
-for (var i = 2; i < process.argv.length; i++)
-  result += Number(process.argv[i])
+for (var i = 2; i < process.argv.length; i++) result += Number(process.argv[i]);
 
-console.log(result)
+console.log(result);
 ```
 
-我在这边用到了数组的reduce方法,顺便去熟悉了下reduce的用法:
+我在这边用到了数组的 reduce 方法,顺便去熟悉了下 reduce 的用法:
 
 ```javascript
 arr.reduce(callback[, initialValue])
 ```
 
-callback有四个参数
-  - `accumulator`   之前函数返回结果的累加值
-  - `currentValue`  数组中当前值
-  - `currentIndex`  数组中当前值的索引(可选)
-  - `array`         数组本身(可选)
+callback 有四个参数
+
+- `accumulator` 之前函数返回结果的累加值
+- `currentValue` 数组中当前值
+- `currentIndex` 数组中当前值的索引(可选)
+- `array` 数组本身(可选)
 
 Baby Steps 过关!

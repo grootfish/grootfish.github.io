@@ -4,32 +4,37 @@ tags: [javascript]
 description: javascript 知识整理
 ---
 
-## 创建一个数组
+# 创建一个数组
+
 ```javascript
 //字面量方式
-var arr = [1,3,'9'];//[1,3,'9']
+var arr = [1, 3, "9"]; //[1,3,'9']
 //构造器方法
-var a = Array();//[]
-var a = Array(3);//[,,]
-var a = Array(1,3,'9')//[1,3,'9']
+var a = Array(); //[]
+var a = Array(3); //[,,]
+var a = Array(1, 3, "9"); //[1,3,'9']
 //ES6 Array.of()返回由所有参数值组成的数组
-let a = Array.of(1,3,'9');//[1,3,'9']
-let a = Array.of();//[]
-let a = Array.of(3);//[3]
+let a = Array.of(1, 3, "9"); //[1,3,'9']
+let a = Array.of(); //[]
+let a = Array.of(3); //[3]
 //ES6 Array.from()将类数组对象转成真正的数组（不改变原对象，返回新数组）
 //参数：
 //- 第一个（必需）：要转化为真正数组的对象
 //- 第二个（可选）：类似数组的map方法，对每个元素进行处理，将处理结果放入返回的新数组中
 //- 第三个（可选）：用来绑定this
-let obj = {0:'a',1:'b',2:'c',length:3};
-let arr = Array.from(obj);//['a','b','c']
-let arr = Array.from('hello');//['h','e','l','l','o']
-let arr = Array.from(new Set(['a','b']));['a','b']
+let obj = { 0: "a", 1: "b", 2: "c", length: 3 };
+let arr = Array.from(obj); //['a','b','c']
+let arr = Array.from("hello"); //['h','e','l','l','o']
+let arr = Array.from(new Set(["a", "b"]));
+["a", "b"];
 ```
+
 ## 原型方法
-### 改变原数组的方法（9个）
+
+### 改变原数组的方法（9 个）
+
 ```javascript
-let a = [1,2,3]
+let a = [1, 2, 3];
 //ES5
 a.splice();
 a.sort();
@@ -43,7 +48,9 @@ a.revese();
 a.copyWithin();
 a.fill();
 ```
-### 不改变原数组的方法（8个）
+
+### 不改变原数组的方法（8 个）
+
 ```javascript
 let a = [1,2,3]
 a.slice(begin,end);//浅拷贝数组元素
@@ -76,4 +83,3 @@ array.keys();
 array.values();
 array.entries();
 ```
-

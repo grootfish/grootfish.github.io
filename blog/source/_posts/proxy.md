@@ -11,7 +11,6 @@ description: proxy
 ---
 
 > 代理对于中国人来说真的是太熟悉不过了，如果你想到外面看看，你就得需要所谓的 vpn。大多数体验过 vpn 上网的就知道代理起到什么样的作用。
-> 
 
 ## 为什么使用代理
 
@@ -21,7 +20,6 @@ description: proxy
 - 负载均衡
 - 压缩资源文件(Gzip)
 - ……
-  
 
 ## 前端开发中使用代理
 
@@ -30,7 +28,6 @@ description: proxy
 - 前后端联调
 - 解决前端跨域问题
 - ……
-  
 
 ## 常用的 web 服务都能实现代理转发
 
@@ -41,16 +38,12 @@ description: proxy
 - nginx
 - node
 
-
-
 ## 正向代理和反向代理
 
 ---
 
 > 正向代理代理的是客户端，而反向代理代理的是服务器端。
 > 正向代理让服务端不知道谁在请求服务，而反向代理让客户端不知道服务来自哪里。
-
-
 
 ## nginx 常见配置
 
@@ -79,8 +72,6 @@ server {
 }
 ```
 
-
-
 ## node 实现代理转发
 
 ---
@@ -101,10 +92,7 @@ function jsonHttpProxy(req, res) {
 var app = express();
 app.use("/users", jsonHttpProxy);
 app.listen(3002);
-
 ```
-
-
 
 ## http-proxy-middleware 简单用法
 
@@ -127,7 +115,8 @@ app.listen(3000);
 ```
 
 ## 工作中配合脚手架使用
-----
+
+---
 
 1. 在配置文件中`proxyTable` 代理映射
 2. 使用 `http-proxy-middleware` 应用代理服务器
