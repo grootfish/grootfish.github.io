@@ -58,7 +58,9 @@ class Mouse extends React.Component {
     );
   }
 }
-
+```
+---
+```javascript
 class Cat extends React.Component {
   render() {
     const mouse = this.props.mouse;
@@ -67,8 +69,9 @@ class Cat extends React.Component {
     );
   }
 }
-
-
+```
+---
+```javascript
 class MouseTracker extends React.Component {
   render() {
     return (
