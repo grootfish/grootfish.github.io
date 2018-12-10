@@ -134,6 +134,3 @@ description: terminal
 - 清屏 1：command + r
 - 清屏 2：ctrl + l
 
-```
-
-```
