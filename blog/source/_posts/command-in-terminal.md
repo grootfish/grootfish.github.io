@@ -24,16 +24,16 @@ description: terminal
 - `cat` 查看文件内容
 - `ps` 命令用于查看系统的进程状态
 
-```bash
-ps -a
-ps -x
-# USER 所属用户
-# PID 进程ID
-# TTY 所属终端
-# VSZ 虚拟内存使用量(KB)
-# RSS 物理内存使用量(KB)
-# STAT 进程状态 R:运行  S:中断  D:不可中断 Z:僵死 T:停止
-```
+  ```bash
+  ps -a
+  ps -x
+  # USER 所属用户
+  # PID 进程ID
+  # TTY 所属终端
+  # VSZ 虚拟内存使用量(KB)
+  # RSS 物理内存使用量(KB)
+  # STAT 进程状态 R:运行  S:中断  D:不可中断 Z:僵死 T:停止
+  ```
 
 - `who` 命令用于查看当前用户信息
 - `history` 用于显示运行过的命令，默认是记录最近的 1000 条命令
@@ -56,56 +56,49 @@ ps -x
 
 ### 权限
 
-#### sudo 命令用于以 root 管理员权限运行某命令
+- sudo 命令用于以 root 管理员权限运行某命令
 
-```bash
-sudo poweroff # 使用 root 权限执行 poweroff 命令
-su - # 切换到 root 账户
-```
+  ```bash
+  sudo poweroff # 使用 root 权限执行 poweroff 命令
+  su - # 切换到 root 账户
+  sudo !! #以 root 权限运行上一条命令
+  ```
 
-#### 以 root 权限运行上一条命令
+- poweroff 用于关闭系统,reboot 用于重启系统
 
-```bash
-sudo !!
-```
+  ```bash
+  poweroff #关闭系统
 
-### 关机和重启
-
-#### poweroff 用于关闭系统,reboot 用于重启系统
-
-```bash
-poweroff #关闭系统
-
-reboot #重启系统·
-```
+  reboot #重启系统·
+  ```
 
 ### 输出
 
-#### echo 命令用于将字符串和变量输出到屏幕上。
+- echo 命令用于将字符串和变量输出到屏幕上。
 
-```bash
-echo hi # 输出字符串
-echo $SHELL # 输出变量
-```
+  ```bash
+  echo hi # 输出字符串
+  echo $SHELL # 输出变量
+  ```
 
-#### cal 命令用于输出一个日历
+- cal 命令用于输出一个日历
 
-```bash
-cal # 输出这个月日历
-cal 2018 # 输出 2018 年日历
-cal 6 2018 # 输出 2018 年 6 月日历
-```
+  ```bash
+  cal # 输出这个月日历
+  cal 2018 # 输出 2018 年日历
+  cal 6 2018 # 输出 2018 年 6 月日历
+  ```
 
-#### date 命令用于显示或设置系统的时间
+- date 命令用于显示或设置系统的时间
 
-```bash
-date # 显示当前日期
-date -s "20180428 7:15:00" # 设置指定日期
-date "+%j" # 显示当天是当年的第几天
-date "+%Y-%m-%d %H:%M:%S" # 以另一种格式显示当前日期
-```
+  ```bash
+  date # 显示当前日期
+  date -s "20180428 7:15:00" # 设置指定日期
+  date "+%j" # 显示当天是当年的第几天
+  date "+%Y-%m-%d %H:%M:%S" # 以另一种格式显示当前日期
+  ```
 
-### 系统状态
+---
 
 ## iterm 快捷键
 
@@ -140,3 +133,7 @@ date "+%Y-%m-%d %H:%M:%S" # 以另一种格式显示当前日期
 - 交换光标处文本：ctrl + t
 - 清屏 1：command + r
 - 清屏 2：ctrl + l
+
+```
+
+```
