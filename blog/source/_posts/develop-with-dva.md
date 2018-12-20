@@ -6,8 +6,6 @@ date: 2018-12-20 14:13:56
 description: 使用dva开发用户管理的 CURD 应用
 ---
 
-# 前端 React 项目开发指北
-
 ## 约定先行
 
 - 公共组件统一放到 `components` 目录下，公共组件建议添加 `propTypes` 和 `defaultProps`
