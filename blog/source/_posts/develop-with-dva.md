@@ -95,12 +95,7 @@ export default {
     pageNo: 1
   },
   reducers: {
-    save(
-      state,
-      {
-        payload: { data: list, pageNo }
-      }
-    ) {
+    save(state,{payload: { data: list, pageNo }}) {
       return { ...state, list, pageNo };
     }
   },
