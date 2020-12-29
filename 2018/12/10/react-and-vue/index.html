@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"grootfish.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="分布标签（dist-tags）补充语义版本控制（例如，v0.12）。使用它们来组织和标记不同版本的包。除了比 semver 编号更具人性可读性之外，标签还允许发布者更有效地分发他们的包。  添加标签要将标记添加到包的特定版本，请使用： 12345npm dist-tag add &amp;lt;pkg&amp;gt;@&amp;lt;version&amp;gt; [&amp;lt;tag&amp;gt;]npm dist-tag rm &amp;l">
-<meta name="keywords" content="node">
+  <meta name="description" content="编写语法 vue推荐的做法是webpack+vue-loader的单文件组件格式 react 使用 JSX 的语法 vue 模板更贴近我们的HTML，可以让我们更直观地思考语义结构，更好地结合CSS的书写。JSX 使用 js 编写 DOM，代码可控性更强，更易调试  构建工具 vue-cli &amp;amp; create-react-app 前者提供多个可选模版，扩展性强。后者提供默认选项，复杂度低">
+<meta name="keywords" content="React,框架,vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何使用 npm 管理包">
-<meta property="og:url" content="https://grootfish.github.io/2019/03/30/npmpackages/index.html">
+<meta property="og:title" content="React &amp; Vue 对比">
+<meta property="og:url" content="https://grootfish.github.io/2018/12/10/react-and-vue/index.html">
 <meta property="og:site_name" content="Grootfish&#39;s blog">
-<meta property="og:description" content="分布标签（dist-tags）补充语义版本控制（例如，v0.12）。使用它们来组织和标记不同版本的包。除了比 semver 编号更具人性可读性之外，标签还允许发布者更有效地分发他们的包。  添加标签要将标记添加到包的特定版本，请使用： 12345npm dist-tag add &amp;lt;pkg&amp;gt;@&amp;lt;version&amp;gt; [&amp;lt;tag&amp;gt;]npm dist-tag rm &amp;l">
+<meta property="og:description" content="编写语法 vue推荐的做法是webpack+vue-loader的单文件组件格式 react 使用 JSX 的语法 vue 模板更贴近我们的HTML，可以让我们更直观地思考语义结构，更好地结合CSS的书写。JSX 使用 js 编写 DOM，代码可控性更强，更易调试  构建工具 vue-cli &amp;amp; create-react-app 前者提供多个可选模版，扩展性强。后者提供默认选项，复杂度低">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-29T06:12:00.920Z">
+<meta property="og:updated_time" content="2020-12-29T06:11:26.441Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何使用 npm 管理包">
-<meta name="twitter:description" content="分布标签（dist-tags）补充语义版本控制（例如，v0.12）。使用它们来组织和标记不同版本的包。除了比 semver 编号更具人性可读性之外，标签还允许发布者更有效地分发他们的包。  添加标签要将标记添加到包的特定版本，请使用： 12345npm dist-tag add &amp;lt;pkg&amp;gt;@&amp;lt;version&amp;gt; [&amp;lt;tag&amp;gt;]npm dist-tag rm &amp;l">
+<meta name="twitter:title" content="React &amp; Vue 对比">
+<meta name="twitter:description" content="编写语法 vue推荐的做法是webpack+vue-loader的单文件组件格式 react 使用 JSX 的语法 vue 模板更贴近我们的HTML，可以让我们更直观地思考语义结构，更好地结合CSS的书写。JSX 使用 js 编写 DOM，代码可控性更强，更易调试  构建工具 vue-cli &amp;amp; create-react-app 前者提供多个可选模版，扩展性强。后者提供默认选项，复杂度低">
 
-<link rel="canonical" href="https://grootfish.github.io/2019/03/30/npmpackages/">
+<link rel="canonical" href="https://grootfish.github.io/2018/12/10/react-and-vue/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>如何使用 npm 管理包 | Grootfish's blog</title>
+  <title>React & Vue 对比 | Grootfish's blog</title>
   
 
 
@@ -171,7 +171,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://grootfish.github.io/2019/03/30/npmpackages/">
+    <link itemprop="mainEntityOfPage" href="https://grootfish.github.io/2018/12/10/react-and-vue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -184,7 +184,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          如何使用 npm 管理包
+          React & Vue 对比
         </h1>
 
         <div class="post-meta">
@@ -194,14 +194,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-03-30 17:07:35" itemprop="dateCreated datePublished" datetime="2019-03-30T17:07:35+08:00">2019-03-30</time>
+              <time title="Created: 2018-12-10 15:28:14" itemprop="dateCreated datePublished" datetime="2018-12-10T15:28:14+08:00">2018-12-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-29 14:12:00" itemprop="dateModified" datetime="2020-12-29T14:12:00+08:00">2020-12-29</time>
+                <time title="Modified: 2020-12-29 14:11:26" itemprop="dateModified" datetime="2020-12-29T14:11:26+08:00">2020-12-29</time>
               </span>
 
           
@@ -215,18 +215,80 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>分布标签（dist-tags）补充语义版本控制（例如，v0.12）。使用它们来组织和标记不同版本的包。除了比 semver 编号更具人性可读性之外，标签还允许发布者更有效地分发他们的包。</p>
-</blockquote>
-<h3 id="添加标签"><a href="#添加标签" class="headerlink" title="添加标签"></a>添加标签</h3><p>要将标记添加到包的特定版本，请使用：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm dist-tag add &lt;pkg&gt;@&lt;version&gt; [&lt;tag&gt;]</span><br><span class="line">npm dist-tag rm &lt;pkg&gt; &lt;tag&gt;</span><br><span class="line">npm dist-tag ls [&lt;pkg&gt;]</span><br><span class="line"></span><br><span class="line">aliases: dist-tags</span><br></pre></td></tr></table></figure>
-<h3 id="使用标签发布"><a href="#使用标签发布" class="headerlink" title="使用标签发布"></a>使用标签发布</h3><p>默认情况下，<code>npm publish</code>会使用标记标记您的包<code>latest</code>。如果使用该<code>--tag</code>标志，则可以指定要使用的另一个标记。例如，以下内容将使用<code>beta</code>标记发布您的包：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish --tag beta</span><br></pre></td></tr></table></figure>
-<h3 id="使用标签安装"><a href="#使用标签安装" class="headerlink" title="使用标签安装"></a>使用标签安装</h3><p>默认<code>npm install &lt;pkg&gt;</code>会使用<code>latest</code>标签。要覆盖此行为，请使用<code>npm install &lt;pkg&gt;@&lt;tag&gt;</code>。以下示例将安装<code>somepkg</code>已标记的版本<code>beta</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install somepkg@beta</span><br></pre></td></tr></table></figure>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>因为<code>dist-tag</code>与<code>semver</code>共享相同的名称空间，所以请避免使用可能导致冲突的标记名称。最佳做法是避免使用以数字或字母<code>v</code>开头的标签。</p>
-<h3 id="使用-npm-version"><a href="#使用-npm-version" class="headerlink" title="使用 npm version"></a>使用 <code>npm version</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm version [&lt;newversion&gt; | major | minor | patch | premajor | preminor | prepatch | prerelease [--preid=&lt;prerelease-id&gt;] | from-git]</span><br><span class="line"></span><br><span class="line"><span class="string">'npm [-v | --version]'</span> to <span class="built_in">print</span> npm version</span><br><span class="line"><span class="string">'npm view &lt;pkg&gt; version'</span> to view a package<span class="string">'s published version</span></span><br><span class="line"><span class="string">'</span>npm ls<span class="string">' to inspect current package/dependency versions</span></span><br></pre></td></tr></table></figure>
-<h3 id="npm-version-的hooks"><a href="#npm-version-的hooks" class="headerlink" title="npm version 的hooks"></a><code>npm version</code> 的<code>hooks</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">  <span class="string">"preversion"</span>: <span class="string">"npm test"</span>,</span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"npm run build &amp;&amp; git add -A dist"</span>,</span><br><span class="line">  <span class="string">"postversion"</span>: <span class="string">"git push &amp;&amp; git push --tags &amp;&amp; rm -rf build/temp"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="编写语法"><a href="#编写语法" class="headerlink" title="编写语法"></a>编写语法</h2><ul>
+<li>vue推荐的做法是webpack+vue-loader的单文件组件格式</li>
+<li>react 使用 JSX 的语法</li>
+<li>vue 模板更贴近我们的HTML，可以让我们更直观地思考语义结构，更好地结合CSS的书写。JSX 使用 js 编写 DOM，代码可控性更强，更易调试</li>
+</ul>
+<h2 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h2><ul>
+<li>vue-cli &amp; create-react-app 前者提供多个可选模版，扩展性强。后者提供默认选项，复杂度低</li>
+</ul>
+<h2 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h2><ul>
+<li>Vue采用数据劫持&amp;发布-订阅模式的方式，vue在创建vm的时候，会将数据配置在实例当中，然后通过Object.defineProperty对数据进行操作，为数据动态添加了getter与setter方法，当获取数据的时候会触发对应的getter方法，当设置数据的时候会触发对应的setter方法，从而进一步触发vm的watcher方法，然后数据更改，vm则会进一步触发视图更新操作。</li>
+<li>React是单向数据流，组件实例状态只能通过setState来进行更改。调用setState更新this.state，它不是马上就会生效的，它是异步的。所以不要认为调用完setState后可以立马获取到最新的值。多个顺序执行的setState不是同步的一个接着一个的执行，会加入一个异步队列，然后最后一起执行，即批处理</li>
+</ul>
+<h2 id="diff-算法"><a href="#diff-算法" class="headerlink" title="diff 算法"></a>diff 算法</h2><ul>
+<li>vue 中 diff 算法实现流程<ol>
+<li>在内存中构建虚拟 DOM</li>
+<li>将内存中虚拟 DOM 树渲染成真是 DOM 结构</li>
+<li>数据改变的时候，将之前的虚拟 DOM 树结合新的数据生成新的虚拟 DOM</li>
+<li>将新的虚拟DOM 和上一次虚拟DOM 树进行对比（diff 算法进行比对），来更新只需要被替换的 DOM,而不是全部重绘。在Diff 算法中，只平层比较前后两颗DOM 树的节点，没有进行深度遍历</li>
+<li>将对比出来的差异进行重新渲染</li>
+</ol>
+</li>
+<li>react 中 diff 算法实现流程<ol>
+<li>在内存中构建虚拟 DOM 描述页面元素</li>
+<li>state 变更的时候，将之前的虚拟 DOM 结合新的数据生成新的虚拟DOM</li>
+<li>DOM 结构发生改变 → 直接卸载并重新 create</li>
+<li>DOM 结构一样 → 不卸载 ，update 更新的属性</li>
+<li>所有同一层级的子节点.他们都可以通过key来区分—–同时遵循1.2两点（key的存在与否只会影响diff算法的复杂度）</li>
+<li>diff 总共就是移动、删除、增加三个操作，而如果给每个节点唯一的标识（key），那么React优先采用移动的方式，能够找到正确的位置去插入新的节点。</li>
+</ol>
+</li>
+<li>vue会跟踪每一个组件的依赖关系，不需要重新渲染整个组件树。而对于React而言,每当应用的状态被改变时,全部组件都会重新渲染,所以react中会需要shouldComponentUpdate这个生命周期函数方法来进行控制。</li>
+</ul>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><ul>
+<li>vue组件内部自动实现判断组件是否需要重新渲染 （defineObjectProptype）</li>
+<li>react 当props或state发生改变的时候会触发,shouldComponentUpdate生命周期函数，优化 render 逻辑</li>
+<li>react 引入 immutable 库配合 shouldComponentUpdate 优化<br>原生支持</li>
+<li>react native &amp; weex</li>
+</ul>
+<h2 id="ssr-服务端渲染"><a href="#ssr-服务端渲染" class="headerlink" title="ssr 服务端渲染"></a>ssr 服务端渲染</h2><ul>
+<li>Next.js （React）&amp; Nuxt.js (Vue)</li>
+</ul>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ul>
+<li>Vue<ul>
+<li>初始化阶段 beforeCreate → created → beforeMount→mounted</li>
+<li>更新阶段 beforeUpdated → updated</li>
+<li>销毁阶段 beforeDestroy → destoryed</li>
+<li>keep-alive 标签 active → deactive</li>
+</ul>
+</li>
+<li>React<ul>
+<li>初始化阶段 constructor → componentWillMount → shouldComponentUpdate → render → componentDidMount</li>
+<li>更新阶段 getDerivedStateFromProps(componentWillReceiveProps) → shouldComponentUpdate → componentWillUpdate → render → componentDidUpdate</li>
+<li>销毁阶段 componentWillUnmount</li>
+</ul>
+</li>
+</ul>
+<h2 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h2><ul>
+<li>vuex 的流程<ol>
+<li>将需要共享的状态挂载到state上：this.$store.state来调用，vuex提供了mapState辅助函数，帮助我们在组件中获取并使用vuex的store中保存的状态。</li>
+<li>我们通过getters来创建状态：通过this.$store.getters来调用</li>
+<li>使用mutations来更改state：通过this.$store.commit来调用</li>
+<li>使用actions来处理异步操作：this.$store.dispatch来调用</li>
+</ol>
+</li>
+<li>redux 的流程<ol>
+<li>创建store： 从redux工具中取出createStore去生成一个store。</li>
+<li>创建一个reducer，然后将其传入到createStore中辅助store的创建。 reducer是一个纯函数，接收当前状态和action，返回一个状态，返回什么，store的状态就是什么，需要注意的是，不能直接操作当前状态，而是需要返回一个新的状态。 想要给store创建默认状态其实就是给reducer一个参数创建默认值。</li>
+<li>组件通过调用store.getState方法来使用store中的state，挂载在了自己的状态上。</li>
+<li>组件产生用户操作，调用actionCreator的方法创建一个action，利用store.dispatch方法传递给reducer</li>
+<li>reducer对action上的标示性信息做出判断后对新状态进行处理，然后返回新状态</li>
+<li>我们可以在组件中，利用store.subscribe方法去订阅数据的变化，也就是可以传入一个函数，当数据变化的时候，传入的函数会执行，在这个函数中让组件去获取最新的状态。</li>
+</ol>
+</li>
+</ul>
 
     </div>
 
@@ -242,7 +304,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://grootfish.github.io/2019/03/30/npmpackages/" title="如何使用 npm 管理包">https://grootfish.github.io/2019/03/30/npmpackages/</a>
+    <a href="https://grootfish.github.io/2018/12/10/react-and-vue/" title="React & Vue 对比">https://grootfish.github.io/2018/12/10/react-and-vue/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -253,7 +315,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/node/" rel="tag"># node</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+              <a href="/tags/框架/" rel="tag"># 框架</a>
+              <a href="/tags/vue/" rel="tag"># vue</a>
           </div>
 
         
@@ -262,12 +326,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/01/04/TCP-IP-and-OIS/" rel="prev" title="TCP/IP 协议栈及 OSI 参考模型">
-      <i class="fa fa-chevron-left"></i> TCP/IP 协议栈及 OSI 参考模型
+    <a href="/2018/12/02/reuse-in-react/" rel="prev" title="React 中的代码复用">
+      <i class="fa fa-chevron-left"></i> React 中的代码复用
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/12/29/computed-in-react/" rel="next" title="在 React 中使用计算属性">
-      在 React 中使用计算属性 <i class="fa fa-chevron-right"></i>
+    <a href="/2018/12/10/command-in-terminal/" rel="next" title="终端命令和快捷键">
+      终端命令和快捷键 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -327,7 +391,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加标签"><span class="nav-number">1.</span> <span class="nav-text">添加标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用标签发布"><span class="nav-number">2.</span> <span class="nav-text">使用标签发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用标签安装"><span class="nav-number">3.</span> <span class="nav-text">使用标签安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">4.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-npm-version"><span class="nav-number">5.</span> <span class="nav-text">使用 npm version</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-version-的hooks"><span class="nav-number">6.</span> <span class="nav-text">npm version 的hooks</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写语法"><span class="nav-number">1.</span> <span class="nav-text">编写语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建工具"><span class="nav-number">2.</span> <span class="nav-text">构建工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据绑定"><span class="nav-number">3.</span> <span class="nav-text">数据绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diff-算法"><span class="nav-number">4.</span> <span class="nav-text">diff 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能优化"><span class="nav-number">5.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssr-服务端渲染"><span class="nav-number">6.</span> <span class="nav-text">ssr 服务端渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-number">7.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态管理"><span class="nav-number">8.</span> <span class="nav-text">状态管理</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

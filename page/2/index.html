@@ -168,78 +168,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://grootfish.github.io/2019/01/04/TCP-IP-and-OIS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="grootfish">
-      <meta itemprop="description" content="just record">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Grootfish's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/04/TCP-IP-and-OIS/" class="post-title-link" itemprop="url">TCP/IP 协议栈及 OSI 参考模型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-01-04 15:35:42" itemprop="dateCreated datePublished" datetime="2019-01-04T15:35:42+08:00">2019-01-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-29 11:10:57" itemprop="dateModified" datetime="2020-12-29T11:10:57+08:00">2020-12-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>TCP/IP 协议栈及 OSI 参考模型详解</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/04/TCP-IP-and-OIS/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://grootfish.github.io/2018/12/20/develop-with-dva/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -271,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-29 11:10:57" itemprop="dateModified" datetime="2020-12-29T11:10:57+08:00">2020-12-29</time>
+                <time title="Modified: 2020-12-29 14:12:15" itemprop="dateModified" datetime="2020-12-29T14:12:15+08:00">2020-12-29</time>
               </span>
 
           
@@ -285,15 +213,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>使用dva开发用户管理的 CURD 应用</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/20/develop-with-dva/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h2 id="约定先行"><a href="#约定先行" class="headerlink" title="约定先行"></a>约定先行</h2><ul>
+<li>公共组件统一放到 <code>components</code> 目录下，公共组件建议添加 <code>propTypes</code> 和 <code>defaultProps</code></li>
+<li>页面组件统一放到 <code>routes</code> 目录下<ul>
+<li><code>services</code>目录定义接口调用</li>
+<li><code>models</code>目录定义 Dva 的 models</li>
+<li><code>views</code>目录处理页面渲染逻辑</li>
+<li><code>constants.js</code> 定义组件常量（可选）</li>
+<li><code>config.js</code> 定义组件配置（可选）</li>
+</ul>
+</li>
+<li>所有事件监听的方法都用 <code>handle</code> 开头。</li>
+<li>把事件监听方法传给组件的时候，属性名用 <code>on</code> 开头</li>
+<li>有时候 <code>render()</code> 方法里面的内容会分开到不同函数里面进行，这些函数都以 <code>render*</code> 开头</li>
+<li>组件的内容编写顺序<ol>
+<li><code>static</code> 开头的类属性，如 <code>defaultProps</code>、<code>propTypes</code>。</li>
+<li>构造函数，<code>constructor</code>。</li>
+<li><code>getter/setter</code>方法。</li>
+<li>组件生命周期。</li>
+<li>组件私有方法。</li>
+<li>事件监听方法，<code>handle*</code>。</li>
+<li><code>render*</code>开头的方法。</li>
+<li><code>render()</code> 方法。</li>
+</ol>
+</li>
+</ul>
+<h2 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h2><h3 id="Step-1-安装-dva-cli-并创建应用"><a href="#Step-1-安装-dva-cli-并创建应用" class="headerlink" title="Step 1. 安装 dva-cli 并创建应用"></a>Step 1. 安装 dva-cli 并创建应用</h3><p>先安装 dva-cli，并确保版本是 1.0.0-beta.2 或以上。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm i dva-cli@next -g</span><br><span class="line">$ dva -v</span><br><span class="line">1.0.0-beta.4</span><br></pre></td></tr></table></figure>
+<p>然后创建应用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ dva new dashboard</span><br><span class="line">$ <span class="built_in">cd</span> dashboard</span><br></pre></td></tr></table></figure>
+<h3 id="Step-2-定义路由"><a href="#Step-2-定义路由" class="headerlink" title="Step 2. 定义路由"></a>Step 2. 定义路由</h3><p>修改页面组件<code>index.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = [</span><br><span class="line">  &#123;</span><br><span class="line">    url: <span class="string">"/demands/list"</span>,</span><br><span class="line">    view: <span class="string">"list"</span>,</span><br><span class="line">    models: [<span class="string">"list"</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    url: <span class="string">"/demands/detail"</span>,</span><br><span class="line">    view: <span class="string">"detail"</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<h3 id="Step-3-构造-service-文件"><a href="#Step-3-构造-service-文件" class="headerlink" title="Step 3. 构造 service 文件"></a>Step 3. 构造 service 文件</h3><p>新增<code>src/routes/Demand/services/list.js</code>，内容如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fetch</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">"/api/demand/list"</span>, &#123;</span><br><span class="line">    method: <span class="string">"POST"</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      ...params</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Step-4-构造-models-文件"><a href="#Step-4-构造-models-文件" class="headerlink" title="Step 4. 构造 models 文件"></a>Step 4. 构造 models 文件</h3><p>新增 <code>src/routes/Demand/models/list.js</code>，内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> demandService <span class="keyword">from</span> <span class="string">"../services/list"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; PAGE_SIZE &#125; <span class="keyword">from</span> <span class="string">"../constants"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  namespace: <span class="string">"demands"</span>,</span><br><span class="line">  state: &#123;</span><br><span class="line">    list: [],</span><br><span class="line">    pageNo: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    save(state,&#123;<span class="attr">payload</span>: &#123; <span class="attr">data</span>: list, pageNo &#125;&#125;) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state, list, pageNo &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  effects: &#123;</span><br><span class="line">    *fetch(&#123; payload &#125;, &#123; call, put &#125;) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; result &#125; = <span class="keyword">yield</span> call(demandService.fetch, payload);</span><br><span class="line">      <span class="keyword">const</span> &#123; data &#125; = result;</span><br><span class="line">      <span class="keyword">yield</span> put(&#123;</span><br><span class="line">        type: <span class="string">"save"</span>,</span><br><span class="line">        payload: &#123; data, <span class="attr">pageNo</span>: payload.pageNo &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  subscriptions: &#123;</span><br><span class="line">    setup(&#123; dispatch, history &#125;) &#123;</span><br><span class="line">      <span class="keyword">return</span> history.listen(<span class="function">(<span class="params">&#123; pathname &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (pathname === <span class="string">"/demands/list"</span>) &#123;</span><br><span class="line">          dispatch(&#123;</span><br><span class="line">            type: <span class="string">"fetch"</span>,</span><br><span class="line">            payload: &#123; <span class="attr">pageSize</span>: PAGE_SIZE, <span class="attr">pageNo</span>: <span class="number">1</span> &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Step-5-添加界面，让列表展现出来"><a href="#Step-5-添加界面，让列表展现出来" class="headerlink" title="Step 5. 添加界面，让列表展现出来"></a>Step 5. 添加界面，让列表展现出来</h3><p>我们把组件存在 <code>src/routes/Demand/views/list.js</code> 里</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"../index.less"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demands</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &lt;div className="demands"&gt;需求列表&lt;/div&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Demands;</span><br></pre></td></tr></table></figure>
+<h3 id="Step-7-处理-loading-状态"><a href="#Step-7-处理-loading-状态" class="headerlink" title="Step 7. 处理 loading 状态"></a>Step 7. 处理 loading 状态</h3><p>dva 有一个管理 effects 执行的 hook，并基于此封装了 dva-loading 插件。通过这个插件，我们可以不必一遍遍地写 showLoading 和 hideLoading，当发起请求时，插件会自动设置数据里的 loading 状态为 true 或 false 。然后我们在渲染 components 时绑定并根据这个数据进行渲染。</p>
+<p>然后在 <code>src/routes/Demand/views/list.js</code> 里绑定 loading 数据：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ loading: state.loading.models.users,</span><br></pre></td></tr></table></figure>
+<h3 id="Step-8-处理数据-CURD"><a href="#Step-8-处理数据-CURD" class="headerlink" title="Step 8. 处理数据 CURD"></a>Step 8. 处理数据 CURD</h3><ul>
+<li><p>CURD 的功能调整基本都可以按照以下三步进行：</p>
+<ol>
+<li>services</li>
+<li>models</li>
+<li>views</li>
+</ol>
+</li>
+<li><p>我们以删除功能为例</p>
+<p>1 . services, 修改 <code>src/routes/Demand/services/list.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">`/api/demand/delete/<span class="subst">$&#123;id&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2 . models, 修改 <code>src/routes/Demand/models/list.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">*remove(&#123; payload &#125;, &#123; call, put &#125;) &#123;</span><br><span class="line">    <span class="keyword">yield</span> call(demandService.remove, payload);</span><br><span class="line">    <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'fetch'</span>, <span class="attr">payload</span>: &#123; <span class="attr">pageSize</span>: PAGE_SIZE, <span class="attr">pageNo</span>: <span class="number">1</span> &#125; &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>3 . views,修改 src/routes/Demand/views/list.js，替换 handleDelete 内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dispatch(&#123; <span class="attr">type</span>: <span class="string">"demands/remove"</span>, <span class="attr">payload</span>: id &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="技术栈一览"><a href="#技术栈一览" class="headerlink" title="技术栈一览"></a>技术栈一览</h2><p><img src="https://www.dropbox.com/s/f2h92qac5cw11z1/Dva.png?dl=0" alt="dva技术栈"></p>
+
       
     </div>
 
@@ -343,7 +321,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-29 11:10:57" itemprop="dateModified" datetime="2020-12-29T11:10:57+08:00">2020-12-29</time>
+                <time title="Modified: 2020-12-29 14:12:24" itemprop="dateModified" datetime="2020-12-29T14:12:24+08:00">2020-12-29</time>
               </span>
 
           
@@ -357,15 +335,221 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>terminal</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/10/command-in-terminal/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>笔者使用的是 Mac 电脑，终端使用的是 Iterm + zsh，本文只是对常用命令的整理，方便自己记忆，没有参考意义</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ul>
+<li><p><code>ls</code>显示在存放在相应文件系统下的所有主要目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls /applications</span><br><span class="line">ls -a #显示所有隐藏的文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>cat</code> 查看文件内容</p>
+</li>
+<li><p><code>ps</code> 命令用于查看系统的进程状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ps -a</span><br><span class="line">ps -x</span><br><span class="line"># USER 所属用户</span><br><span class="line"># PID 进程ID</span><br><span class="line"># TTY 所属终端</span><br><span class="line"># VSZ 虚拟内存使用量(KB)</span><br><span class="line"># RSS 物理内存使用量(KB)</span><br><span class="line"># STAT 进程状态 R:运行  S:中断  D:不可中断 Z:僵死 T:停止</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>who</code> 命令用于查看当前用户信息</p>
+</li>
+<li><code>history</code> 用于显示运行过的命令，默认是记录最近的 1000 条命令</li>
+<li><code>ifconfig</code> 命令用于查看网卡配置和网络状态信息</li>
+</ul>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ul>
+<li><p><code>cd</code> 用来跳转（或“更改”）到一个目录的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd Gym\ Playlist # 空格需要转译</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>mv</code>将文件从一个文件夹转移到另一个文件夹</p>
+</li>
+<li><code>mkdir</code> 创建目录或文件夹</li>
+<li><code>rmdir</code> 删除目录或文件夹</li>
+<li><code>rm</code> 删除文件</li>
+<li><code>touch</code> 创建新的、空的文件</li>
+<li><code>vi/vim</code> 编辑文件</li>
+</ul>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><ul>
+<li><p>sudo 命令用于以 root 管理员权限运行某命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo poweroff # 使用 root 权限执行 poweroff 命令</span><br><span class="line">su - # 切换到 root 账户</span><br><span class="line">sudo !! #以 root 权限运行上一条命令</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>poweroff 用于关闭系统,reboot 用于重启系统</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">poweroff #关闭系统</span><br><span class="line"></span><br><span class="line">reboot #重启系统·</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><ul>
+<li><p>echo 命令用于将字符串和变量输出到屏幕上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo hi # 输出字符串</span><br><span class="line">echo $SHELL # 输出变量</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cal 命令用于输出一个日历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cal # 输出这个月日历</span><br><span class="line">cal 2018 # 输出 2018 年日历</span><br><span class="line">cal 6 2018 # 输出 2018 年 6 月日历</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>date 命令用于显示或设置系统的时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">date # 显示当前日期</span><br><span class="line">date -s &quot;20180428 7:15:00&quot; # 设置指定日期</span><br><span class="line">date &quot;+%j&quot; # 显示当天是当年的第几天</span><br><span class="line">date &quot;+%Y-%m-%d %H:%M:%S&quot; # 以另一种格式显示当前日期</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="iterm-快捷键"><a href="#iterm-快捷键" class="headerlink" title="iterm 快捷键"></a>iterm 快捷键</h2><h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><ul>
+<li>新建标签：command + t</li>
+<li>关闭标签：command + w</li>
+<li>切换标签：command + 数字 1/2 command + 左右方向键</li>
+<li>切换全屏：command + enter</li>
+<li>查找：command + f</li>
+</ul>
+<h3 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h3><ul>
+<li>垂直分屏：command + d</li>
+<li>水平分屏：command + shift + d</li>
+<li>切换屏幕：command + option + 方向键 command + [ 或 command + ]</li>
+<li>查看历史命令：command + ;</li>
+<li>查看剪贴板历史：command + shift + h</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>清除当前行：ctrl + u</li>
+<li>到行首：ctrl + a</li>
+<li>到行尾：ctrl + e</li>
+<li>前进后退：ctrl + f/b (相当于左右方向键)</li>
+<li>上一条命令：ctrl + p</li>
+<li>搜索命令历史：ctrl + r</li>
+<li>删除当前光标的字符：ctrl + d</li>
+<li>删除光标之前的字符：ctrl + h</li>
+<li>删除光标之前的单词：ctrl + w</li>
+<li>删除到文本末尾：ctrl + k</li>
+<li>交换光标处文本：ctrl + t</li>
+<li>清屏 1：command + r</li>
+<li>清屏 2：ctrl + l</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://grootfish.github.io/2018/12/10/react-and-vue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="grootfish">
+      <meta itemprop="description" content="just record">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Grootfish's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/10/react-and-vue/" class="post-title-link" itemprop="url">React & Vue 对比</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-12-10 15:28:14" itemprop="dateCreated datePublished" datetime="2018-12-10T15:28:14+08:00">2018-12-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-29 14:11:26" itemprop="dateModified" datetime="2020-12-29T14:11:26+08:00">2020-12-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="编写语法"><a href="#编写语法" class="headerlink" title="编写语法"></a>编写语法</h2><ul>
+<li>vue推荐的做法是webpack+vue-loader的单文件组件格式</li>
+<li>react 使用 JSX 的语法</li>
+<li>vue 模板更贴近我们的HTML，可以让我们更直观地思考语义结构，更好地结合CSS的书写。JSX 使用 js 编写 DOM，代码可控性更强，更易调试</li>
+</ul>
+<h2 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h2><ul>
+<li>vue-cli &amp; create-react-app 前者提供多个可选模版，扩展性强。后者提供默认选项，复杂度低</li>
+</ul>
+<h2 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h2><ul>
+<li>Vue采用数据劫持&amp;发布-订阅模式的方式，vue在创建vm的时候，会将数据配置在实例当中，然后通过Object.defineProperty对数据进行操作，为数据动态添加了getter与setter方法，当获取数据的时候会触发对应的getter方法，当设置数据的时候会触发对应的setter方法，从而进一步触发vm的watcher方法，然后数据更改，vm则会进一步触发视图更新操作。</li>
+<li>React是单向数据流，组件实例状态只能通过setState来进行更改。调用setState更新this.state，它不是马上就会生效的，它是异步的。所以不要认为调用完setState后可以立马获取到最新的值。多个顺序执行的setState不是同步的一个接着一个的执行，会加入一个异步队列，然后最后一起执行，即批处理</li>
+</ul>
+<h2 id="diff-算法"><a href="#diff-算法" class="headerlink" title="diff 算法"></a>diff 算法</h2><ul>
+<li>vue 中 diff 算法实现流程<ol>
+<li>在内存中构建虚拟 DOM</li>
+<li>将内存中虚拟 DOM 树渲染成真是 DOM 结构</li>
+<li>数据改变的时候，将之前的虚拟 DOM 树结合新的数据生成新的虚拟 DOM</li>
+<li>将新的虚拟DOM 和上一次虚拟DOM 树进行对比（diff 算法进行比对），来更新只需要被替换的 DOM,而不是全部重绘。在Diff 算法中，只平层比较前后两颗DOM 树的节点，没有进行深度遍历</li>
+<li>将对比出来的差异进行重新渲染</li>
+</ol>
+</li>
+<li>react 中 diff 算法实现流程<ol>
+<li>在内存中构建虚拟 DOM 描述页面元素</li>
+<li>state 变更的时候，将之前的虚拟 DOM 结合新的数据生成新的虚拟DOM</li>
+<li>DOM 结构发生改变 → 直接卸载并重新 create</li>
+<li>DOM 结构一样 → 不卸载 ，update 更新的属性</li>
+<li>所有同一层级的子节点.他们都可以通过key来区分—–同时遵循1.2两点（key的存在与否只会影响diff算法的复杂度）</li>
+<li>diff 总共就是移动、删除、增加三个操作，而如果给每个节点唯一的标识（key），那么React优先采用移动的方式，能够找到正确的位置去插入新的节点。</li>
+</ol>
+</li>
+<li>vue会跟踪每一个组件的依赖关系，不需要重新渲染整个组件树。而对于React而言,每当应用的状态被改变时,全部组件都会重新渲染,所以react中会需要shouldComponentUpdate这个生命周期函数方法来进行控制。</li>
+</ul>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><ul>
+<li>vue组件内部自动实现判断组件是否需要重新渲染 （defineObjectProptype）</li>
+<li>react 当props或state发生改变的时候会触发,shouldComponentUpdate生命周期函数，优化 render 逻辑</li>
+<li>react 引入 immutable 库配合 shouldComponentUpdate 优化<br>原生支持</li>
+<li>react native &amp; weex</li>
+</ul>
+<h2 id="ssr-服务端渲染"><a href="#ssr-服务端渲染" class="headerlink" title="ssr 服务端渲染"></a>ssr 服务端渲染</h2><ul>
+<li>Next.js （React）&amp; Nuxt.js (Vue)</li>
+</ul>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ul>
+<li>Vue<ul>
+<li>初始化阶段 beforeCreate → created → beforeMount→mounted</li>
+<li>更新阶段 beforeUpdated → updated</li>
+<li>销毁阶段 beforeDestroy → destoryed</li>
+<li>keep-alive 标签 active → deactive</li>
+</ul>
+</li>
+<li>React<ul>
+<li>初始化阶段 constructor → componentWillMount → shouldComponentUpdate → render → componentDidMount</li>
+<li>更新阶段 getDerivedStateFromProps(componentWillReceiveProps) → shouldComponentUpdate → componentWillUpdate → render → componentDidUpdate</li>
+<li>销毁阶段 componentWillUnmount</li>
+</ul>
+</li>
+</ul>
+<h2 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h2><ul>
+<li>vuex 的流程<ol>
+<li>将需要共享的状态挂载到state上：this.$store.state来调用，vuex提供了mapState辅助函数，帮助我们在组件中获取并使用vuex的store中保存的状态。</li>
+<li>我们通过getters来创建状态：通过this.$store.getters来调用</li>
+<li>使用mutations来更改state：通过this.$store.commit来调用</li>
+<li>使用actions来处理异步操作：this.$store.dispatch来调用</li>
+</ol>
+</li>
+<li>redux 的流程<ol>
+<li>创建store： 从redux工具中取出createStore去生成一个store。</li>
+<li>创建一个reducer，然后将其传入到createStore中辅助store的创建。 reducer是一个纯函数，接收当前状态和action，返回一个状态，返回什么，store的状态就是什么，需要注意的是，不能直接操作当前状态，而是需要返回一个新的状态。 想要给store创建默认状态其实就是给reducer一个参数创建默认值。</li>
+<li>组件通过调用store.getState方法来使用store中的state，挂载在了自己的状态上。</li>
+<li>组件产生用户操作，调用actionCreator的方法创建一个action，利用store.dispatch方法传递给reducer</li>
+<li>reducer对action上的标示性信息做出判断后对新状态进行处理，然后返回新状态</li>
+<li>我们可以在组件中，利用store.subscribe方法去订阅数据的变化，也就是可以传入一个函数，当数据变化的时候，传入的函数会执行，在这个函数中让组件去获取最新的状态。</li>
+</ol>
+</li>
+</ul>
+
       
     </div>
 
@@ -509,7 +693,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-29 11:10:57" itemprop="dateModified" datetime="2020-12-29T11:10:57+08:00">2020-12-29</time>
+                <time title="Modified: 2020-12-29 14:12:07" itemprop="dateModified" datetime="2020-12-29T14:12:07+08:00">2020-12-29</time>
               </span>
 
           
@@ -523,15 +707,55 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>我常使用的工具</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/15/edge-tool/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>我算是半个工具控，有段时间会追求效率工具，希望工具能提高生产力。现在意识到工具可以给你提供帮助，但真正想提高效率还是要靠自己，提高自己才是最大的收益。当然也没必要排斥工具，善假于物而不为物所迷即可</p>
+<blockquote>
+<p>君子生非异也，善假于物也 –荀子《劝学》</p>
+</blockquote>
+<h2 id="效率类"><a href="#效率类" class="headerlink" title="效率类"></a>效率类</h2><ul>
+<li>XMind 思维导图工具</li>
+<li>原生邮箱 勉强够用</li>
+<li>原生备忘录 同步速度快，适配性好</li>
+<li>原生提醒事项 简单够用</li>
+<li>1Password 我的密码管家</li>
+<li>Dropbox 保护隐私，同步速度快</li>
+<li>Paste 剪贴板工具</li>
+<li>极光词典 移动端字典</li>
+<li>Office Lens 微软家的 OCR 工具 够用</li>
+<li>白描 中文 OCR</li>
+<li><del>印象笔记</del> 启动速度慢已弃用</li>
+</ul>
+<h2 id="娱乐"><a href="#娱乐" class="headerlink" title="娱乐"></a>娱乐</h2><ul>
+<li>Apple Music 国区便宜</li>
+<li>Spotify 版权全</li>
+<li>网易云音乐 国内歌曲</li>
+</ul>
+<h2 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h2><ul>
+<li>Instapper 稍后读工具</li>
+<li>Fiery Feeds Rss 阅读器</li>
+<li>Price Tag 了解一些软件降价信息</li>
+<li>Kindle 阅读书籍</li>
+<li>微信读书</li>
+<li>PPHub 刷 GitHub 用</li>
+</ul>
+<h2 id="社交"><a href="#社交" class="headerlink" title="社交"></a>社交</h2><ul>
+<li>微信 天朝必装吧</li>
+<li>iMessage 家人交流</li>
+<li>钉钉 办公交流用</li>
+<li>Telegram 了解一些 qiang 外资讯</li>
+</ul>
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><ul>
+<li>VS code 现阶段最佳前端编辑器</li>
+<li>Lepton 代码片段管理</li>
+<li>Dash 离线文档</li>
+<li>iTerm 终端工具</li>
+<li>SwitchHosts 一键切换 hosts</li>
+<li>Axure RP 看原型</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>shadoworcket 够用</li>
+<li>MoneyWiz 管钱的</li>
+</ul>
+
       
     </div>
 
@@ -757,7 +981,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-29 11:10:57" itemprop="dateModified" datetime="2020-12-29T11:10:57+08:00">2020-12-29</time>
+                <time title="Modified: 2020-12-29 14:12:02" itemprop="dateModified" datetime="2020-12-29T14:12:02+08:00">2020-12-29</time>
               </span>
 
           
@@ -771,15 +995,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>proxy</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/09/12/proxy/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h2 id="代理转发的前世今生"><a href="#代理转发的前世今生" class="headerlink" title="代理转发的前世今生"></a>代理转发的前世今生</h2><hr>
+<blockquote>
+<p>代理对于中国人来说真的是太熟悉不过了，如果你想到外面看看，你就得需要所谓的 vpn。大多数体验过 vpn 上网的就知道代理起到什么样的作用。</p>
+</blockquote>
+<h2 id="为什么使用代理"><a href="#为什么使用代理" class="headerlink" title="为什么使用代理"></a>为什么使用代理</h2><ul>
+<li>分担服务器压力</li>
+<li>缓存资源</li>
+<li>安全</li>
+<li>负载均衡</li>
+<li>压缩资源文件(Gzip)</li>
+<li>……</li>
+</ul>
+<h2 id="前端开发中使用代理"><a href="#前端开发中使用代理" class="headerlink" title="前端开发中使用代理"></a>前端开发中使用代理</h2><hr>
+<ul>
+<li>前后端联调</li>
+<li>解决前端跨域问题</li>
+<li>……</li>
+</ul>
+<h2 id="常用的-web-服务都能实现代理转发"><a href="#常用的-web-服务都能实现代理转发" class="headerlink" title="常用的 web 服务都能实现代理转发"></a>常用的 web 服务都能实现代理转发</h2><hr>
+<ul>
+<li>Tomcat</li>
+<li>Apache</li>
+<li>nginx</li>
+<li>node</li>
+</ul>
+<h2 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h2><hr>
+<blockquote>
+<p>正向代理代理的是客户端，而反向代理代理的是服务器端。<br>正向代理让服务端不知道谁在请求服务，而反向代理让客户端不知道服务来自哪里。</p>
+</blockquote>
+<h2 id="nginx-常见配置"><a href="#nginx-常见配置" class="headerlink" title="nginx 常见配置"></a>nginx 常见配置</h2><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">80</span>;</span><br><span class="line">    # 配置可访问域名，注意需要添加相应host配置</span><br><span class="line">    server_name xxx.dev;</span><br><span class="line">    #charset koi8-r;</span><br><span class="line">    error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /<span class="number">50</span>x.html;</span><br><span class="line">    location = <span class="regexp">/50x.html &#123;</span></span><br><span class="line"><span class="regexp">        root   html;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    location /</span>api/v1 &#123;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Forwarded-For $remote_addr;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        # API Server</span><br><span class="line">        proxy_pass http:<span class="comment">//localhost:4000;</span></span><br><span class="line">        proxy_next_upstream error;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="node-实现代理转发"><a href="#node-实现代理转发" class="headerlink" title="node 实现代理转发"></a>node 实现代理转发</h2><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">var</span> httpProxy = <span class="built_in">require</span>(<span class="string">"http-proxy"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">  target: <span class="string">"http://jsonplaceholder.typicode.com/users"</span>,</span><br><span class="line">  changeOrigin: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> httpProxyServer = httpProxy.createProxyServer(options);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonHttpProxy</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  httpProxyServer.web(req, res);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.use(<span class="string">"/users"</span>, jsonHttpProxy);</span><br><span class="line">app.listen(<span class="number">3002</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="http-proxy-middleware-简单用法"><a href="#http-proxy-middleware-简单用法" class="headerlink" title="http-proxy-middleware 简单用法"></a>http-proxy-middleware 简单用法</h2><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">var</span> proxy = <span class="built_in">require</span>(<span class="string">"http-proxy-middleware"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line">app.use(</span><br><span class="line">  <span class="string">"/api"</span>,</span><br><span class="line">  proxy(&#123;</span><br><span class="line">    target: <span class="string">"http://www.example.org"</span>,</span><br><span class="line">    changeOrigin: <span class="literal">true</span></span><br><span class="line">  &#125;)</span><br><span class="line">);</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="工作中配合脚手架使用"><a href="#工作中配合脚手架使用" class="headerlink" title="工作中配合脚手架使用"></a>工作中配合脚手架使用</h2><hr>
+<ol>
+<li>在配置文件中<code>proxyTable</code> 代理映射</li>
+<li>使用 <code>http-proxy-middleware</code> 应用代理服务器</li>
+</ol>
+
       
     </div>
 
