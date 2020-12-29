@@ -65,28 +65,6 @@
   </entry>
   
   <entry>
-    <title>初始化 Mac 环境</title>
-    <link href="https://grootfish.github.io/2020/12/29/init-mac/"/>
-    <id>https://grootfish.github.io/2020/12/29/init-mac/</id>
-    <published>2020-12-29T03:10:57.226Z</published>
-    <updated>2020-12-29T03:10:57.226Z</updated>
-    
-    <content type="html"><![CDATA[<p>笔者使用的电脑是 Mac.拿到一台新 Mac 需要装各种环境 &amp; 软件。这篇文章主要做一个记录，减少初始化一台新 Mac 的时间，记录给自己用的，每个人的工作环境都不一样，没有参考性</p><h3 id="初始化终端"><a href="#初始化终端" class="headerlink" title="初始化终端"></a>初始化终端</h3><ul><li style="list-style: none"><input type="checkbox"> 先安装 macOS Command Line Tools <code>xcode-select --install</code></li><li style="list-style: none"><input type="checkbox"> 安装 homebrew (Mac 包管理工具)</li><li style="list-style: none"><input type="checkbox"> 使用 <a href="https://github.com/Homebrew/homebrew-bundle" target="_blank" rel="noopener">Homebrew Bundler</a> 初始化系统</li><li style="list-style: none"><input type="checkbox"> 安装 Iterm 2</li><li style="list-style: none"><input type="checkbox"> 安装 oh-my-zshell</li></ul><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></table></figure><ul><li style="list-style: none"><input type="checkbox"> 把 zsh 设置成默认 shell</li></ul><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把 zsh 加入 shell 列表</span></span><br><span class="line">sudo sh -c <span class="string">'echo /usr/local/bin/zsh &gt;&gt; /etc/shells'</span></span><br><span class="line"><span class="comment"># 设置 zsh 为默认 shell</span></span><br><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></table></figure><ul><li style="list-style: none"><input type="checkbox"> 配置终端主题 &amp; 字体 (我使用 <a href="https://github.com/romkatv/powerlevel10k" target="_blank" rel="noopener">powerlevel10k</a>)</li><li style="list-style: none"><input type="checkbox"> 编辑器 VS code 增加终端快捷方式</li></ul><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ~/Applications/code</span><br></pre></td></tr></table></figure><h3 id="初始化编辑器"><a href="#初始化编辑器" class="headerlink" title="初始化编辑器"></a>初始化编辑器</h3><ul><li style="list-style: none"><input type="checkbox"> 编辑器配置都通过 <code>code-settings-sync</code> 保存在 gist,直接下载配置使用即可</li></ul><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code --install-extension Shan.code-settings-sync</span><br></pre></td></tr></table></figure><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul><li style="list-style: none"><input type="checkbox"> 配置 overWall 环境</li><li style="list-style: none"><input type="checkbox"> 按需安装应用</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      初始化 Mac
-    
-    </summary>
-    
-      <category term="Mac" scheme="https://grootfish.github.io/categories/Mac/"/>
-    
-    
-      <category term="Mac" scheme="https://grootfish.github.io/tags/Mac/"/>
-    
-  </entry>
-  
-  <entry>
     <title>hooks 已经到来</title>
     <link href="https://grootfish.github.io/2020/12/29/hooks/"/>
     <id>https://grootfish.github.io/2020/12/29/hooks/</id>
@@ -107,6 +85,28 @@
       <category term="javascript" scheme="https://grootfish.github.io/tags/javascript/"/>
     
       <category term="react" scheme="https://grootfish.github.io/tags/react/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初始化 Mac 环境</title>
+    <link href="https://grootfish.github.io/2020/12/29/init-mac/"/>
+    <id>https://grootfish.github.io/2020/12/29/init-mac/</id>
+    <published>2020-12-29T03:10:57.226Z</published>
+    <updated>2020-12-29T03:10:57.226Z</updated>
+    
+    <content type="html"><![CDATA[<p>笔者使用的电脑是 Mac.拿到一台新 Mac 需要装各种环境 &amp; 软件。这篇文章主要做一个记录，减少初始化一台新 Mac 的时间，记录给自己用的，每个人的工作环境都不一样，没有参考性</p><h3 id="初始化终端"><a href="#初始化终端" class="headerlink" title="初始化终端"></a>初始化终端</h3><ul><li style="list-style: none"><input type="checkbox"> 先安装 macOS Command Line Tools <code>xcode-select --install</code></li><li style="list-style: none"><input type="checkbox"> 安装 homebrew (Mac 包管理工具)</li><li style="list-style: none"><input type="checkbox"> 使用 <a href="https://github.com/Homebrew/homebrew-bundle" target="_blank" rel="noopener">Homebrew Bundler</a> 初始化系统</li><li style="list-style: none"><input type="checkbox"> 安装 Iterm 2</li><li style="list-style: none"><input type="checkbox"> 安装 oh-my-zshell</li></ul><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></table></figure><ul><li style="list-style: none"><input type="checkbox"> 把 zsh 设置成默认 shell</li></ul><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把 zsh 加入 shell 列表</span></span><br><span class="line">sudo sh -c <span class="string">'echo /usr/local/bin/zsh &gt;&gt; /etc/shells'</span></span><br><span class="line"><span class="comment"># 设置 zsh 为默认 shell</span></span><br><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></table></figure><ul><li style="list-style: none"><input type="checkbox"> 配置终端主题 &amp; 字体 (我使用 <a href="https://github.com/romkatv/powerlevel10k" target="_blank" rel="noopener">powerlevel10k</a>)</li><li style="list-style: none"><input type="checkbox"> 编辑器 VS code 增加终端快捷方式</li></ul><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ~/Applications/code</span><br></pre></td></tr></table></figure><h3 id="初始化编辑器"><a href="#初始化编辑器" class="headerlink" title="初始化编辑器"></a>初始化编辑器</h3><ul><li style="list-style: none"><input type="checkbox"> 编辑器配置都通过 <code>code-settings-sync</code> 保存在 gist,直接下载配置使用即可</li></ul><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code --install-extension Shan.code-settings-sync</span><br></pre></td></tr></table></figure><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul><li style="list-style: none"><input type="checkbox"> 配置 overWall 环境</li><li style="list-style: none"><input type="checkbox"> 按需安装应用</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      初始化 Mac
+    
+    </summary>
+    
+      <category term="Mac" scheme="https://grootfish.github.io/categories/Mac/"/>
+    
+    
+      <category term="Mac" scheme="https://grootfish.github.io/tags/Mac/"/>
     
   </entry>
   
