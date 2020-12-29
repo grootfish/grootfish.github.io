@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"grootfish.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="react 知识整理">
+<meta name="keywords" content="javascript,react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hooks 已经到来">
+<meta property="og:url" content="https://grootfish.github.io/2020/12/29/hooks/index.html">
+<meta property="og:site_name" content="Grootfish&#39;s blog">
+<meta property="og:description" content="react 知识整理">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-12-29T03:10:57.226Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hooks 已经到来">
+<meta name="twitter:description" content="react 知识整理">
+
+<link rel="canonical" href="https://grootfish.github.io/2020/12/29/hooks/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>hooks 已经到来 | Grootfish's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Grootfish's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">writing something</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://grootfish.github.io/2020/12/29/hooks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="grootfish">
+      <meta itemprop="description" content="just record">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Grootfish's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hooks 已经到来
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-29 11:10:57" itemprop="dateCreated datePublished" datetime="2020-12-29T11:10:57+08:00">2020-12-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">react 知识整理</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Hooks-已经到来"><a href="#Hooks-已经到来" class="headerlink" title="Hooks 已经到来"></a>Hooks 已经到来</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Hooks 是 React 16.8 新增的特性，它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。<br>Redux 的作者 Dan Abramov 在 2018 年的 ReactConf 向大家首次介绍了 React Hooks。React Hooks 是为了解决 Class Component 的一些问题而引入的。</p>
+<p>Vue 的作者尤雨溪在 VueConf China 2019 也给 Vue 3.0 引入了一个叫 Functional-based API 的概念，它是受 React Hooks 启发而增加的新 API。由于 Vue 2.0 组件组合的模式是对象字面量形式，所以 Functional-based API 可以作为 Mixins 的替代，配合新的响应式 API 作为新的组件组合模式。React 和 Vue 对于降低前端开发复杂度这一问题都不约而同地选择了 Hooks 这一方案，这到底是为什么呢？</p>
+<h3 id="为什么要用-Hooks"><a href="#为什么要用-Hooks" class="headerlink" title="为什么要用 Hooks"></a>为什么要用 Hooks</h3><p>React Hooks 是为了解决 Class Component 的一些问题而引入的</p>
+<ul>
+<li>类组件间的逻辑难以复用。因为 JavaScript 不像 Go 或 C++ 一样，Class 可以多重继承，类的逻辑的复用就成了一个问题；</li>
+<li>类组件经常会在生命周期做一些数据获取事件监听的副作用函数，这样的情况下我们就很难把组件拆分为更小的力度；</li>
+<li>类组件 this 指向问题令人迷惑。很多新手应该会被 Class 组件绑定事件的 this 迷惑过，绑定事件可以用 bind，可以直接写箭头函数，也可以写类属性函数，但到底哪种方法才是最好的呢？</li>
+</ul>
+<p>Hooks 可以使我们模块化开发的粒度更细，更函数式。组件的功能变成了由 Hooks 一点点地装配起来。这样的特性，也解决了上面提到的痛点：代码复用、组件树过深、类组件问题。</p>
+<p>对于代码逻辑复用，React 和 Vue 都提出过各自的解决方案，其中比较常用的逻辑复用方案是 <code>mixins</code>、<code>HOC</code>。这两种方案都可以实现逻辑上的复用，但是都有一些额外的问题:</p>
+<ul>
+<li>mixins 的问题：<ul>
+<li>首先是命名空间耦合，如果多个对象同名参数，这些参数就会耦合在一起;</li>
+<li>由于 mixins 必须是运行时才能知道具体有什么参数，所以是 TypeScript 是无法做静态检查的</li>
+<li>组件参数不清晰，在 mixins 中组件的 props 和其他参数没什么两样，很容易被其它的 mixins 覆盖掉</li>
+</ul>
+</li>
+<li>HOC 高阶组件的问题：<ul>
+<li>需要在原组件上进行包裹或者嵌套，如果大量使用HOC，将会产生非常多的嵌套，让调试变得困难；</li>
+<li>每多用一次高阶组件，都会多出一个组件实例</li>
+<li>在不遵守约定的情况下 props 还是有可能会在高阶组件中被更改</li>
+</ul>
+</li>
+</ul>
+<p>Hooks 的出现很好的解决了上面的问题。因为 Hooks 跑在一个普通函数式组件里，所以他没有命名空间的问题，同时 TypeScript 也能对普通函数做很好的静态检查，而且 Hooks 也不能更改组件的 Props，传入的是啥最后可用的就是啥；最后 Hooks 基于函数式编程，不会产生多个组件实例。</p>
+<h3 id="Vue-Hooks-与-React-Hooks-的差异"><a href="#Vue-Hooks-与-React-Hooks-的差异" class="headerlink" title="Vue Hooks 与 React Hooks 的差异"></a>Vue Hooks 与 React Hooks 的差异</h3><h4 id="简单语法的差异"><a href="#简单语法的差异" class="headerlink" title="简单语法的差异"></a>简单语法的差异</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// React hooks 的基本使用</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 初始化 firstName 状态变量</span></span><br><span class="line">  <span class="keyword">const</span> [firstName, setFirstName] = useState(<span class="string">'Billie'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 持久化 name 数据的副作用</span></span><br><span class="line">  useEffect(<span class="function"><span class="keyword">function</span> <span class="title">persist</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(name.value !== <span class="string">''</span>) &#123;</span><br><span class="line">      localStorage.setItem(<span class="string">'nameData'</span>, name);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 初始化 lastName 状态变量</span></span><br><span class="line">  <span class="keyword">const</span> [lastName, setLastName] = useState(<span class="string">'Eilish'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 更新 title 的副作用</span></span><br><span class="line">  useEffect(<span class="function"><span class="keyword">function</span> <span class="title">updateTitle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.title = <span class="string">`<span class="subst">$&#123;firstName&#125;</span> <span class="subst">$&#123;lastName&#125;</span>`</span>;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vue hooks 的基本使用</span></span><br><span class="line"><span class="keyword">import</span> &#123;ref, watch&#125; <span class="keyword">from</span> <span class="string">'Vue'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  setup() &#123;</span><br><span class="line">    <span class="comment">// 使用 firstName 状态变量</span></span><br><span class="line">    <span class="keyword">const</span> firstName = ref(<span class="string">"Billie"</span>);</span><br><span class="line">    <span class="comment">// 使用一个 watcher 以持久化数据</span></span><br><span class="line">    <span class="keyword">if</span>(name.value !== <span class="string">''</span>) &#123;</span><br><span class="line">      watch(<span class="function"><span class="keyword">function</span> <span class="title">persist</span>(<span class="params"></span>) =&gt; </span>&#123;</span><br><span class="line">        localStorage.setItem(<span class="string">'nameData'</span>, name.value);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// 使用 lastName 状态变量</span></span><br><span class="line">   <span class="keyword">const</span> lastName = ref(<span class="string">"Eilish"</span>);</span><br><span class="line">   <span class="comment">// 使用一个 watcher 以更新 title</span></span><br><span class="line">   watch(<span class="function"><span class="keyword">function</span> <span class="title">updateTitle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">document</span>.title = <span class="string">`<span class="subst">$&#123;firstName.value&#125;</span> <span class="subst">$&#123;lastName.value&#125;</span>`</span>;</span><br><span class="line">   &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Vue 中的 setup 仅执行一遍，而 React Function Component 每次渲染都会执行。</p>
+<p>对 React Hooks 而言，调用必须放在最前面，而且不能被包含在条件语句里，这是因为 React Hooks 采用下标方式寻找状态，一旦位置不对或者 Hooks 放在了条件中，就无法正确找到对应位置的值。</p>
+<p>而 Vue Function API 中的 Hooks 可以放在任意位置、任意命名、被条件语句任意包裹的，因为其并不会触发 setup 的更新，只在需要的时候更新自己的引用值即可，利用 Proxy 监听机制，可以做到 setup 函数不重新执行，但 Template 重新渲染的效果</p>
+<h4 id="自定义-hooks-的差异"><a href="#自定义-hooks-的差异" class="headerlink" title="自定义 hooks 的差异"></a>自定义 hooks 的差异</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// React 中使用 hooks </span></span><br><span class="line"><span class="keyword">import</span> React, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义hook useMouse</span></span><br><span class="line"><span class="keyword">const</span> useMouse = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 使用hookuseState初始化一个state</span></span><br><span class="line">    <span class="keyword">const</span> [postion, setPostion] = useState(&#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;);</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">handleMove</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        setPostion(&#123; <span class="attr">x</span>: e.clientX, <span class="attr">y</span>: e.clientY &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">window</span>.addEventListener(<span class="string">'mousemove'</span>, handleMove);</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">window</span>.removeEventListener(<span class="string">'mousemove'</span>, handleMove);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;, [postion]);</span><br><span class="line">    <span class="keyword">return</span> postion;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; x, y &#125; = useMouse(); <span class="comment">// 内部维护自己的postion相关的逻辑</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            current position x: &#123;x&#125;, <span class="attr">y</span>: &#123;y&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vue 中使用 hooks</span></span><br><span class="line"><span class="keyword">import</span> &#123; value, computed, watch, onMounted &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useMouse</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> x = value(<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">const</span> y = value(<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">const</span> update = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    x.value = e.pageX</span><br><span class="line">    y.value = e.pageY</span><br><span class="line">  &#125;</span><br><span class="line">  onMounted(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'mousemove'</span>, update)</span><br><span class="line">  &#125;)</span><br><span class="line">  onUnmounted(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.removeEventListener(<span class="string">'mousemove'</span>, update)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> &#123; x, y &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在组件中使用该函数</span></span><br><span class="line"><span class="keyword">const</span> Component = &#123;</span><br><span class="line">  setup() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; x, y &#125; = useMouse()</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> &#123; x, y &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">`&lt;div&gt;&#123;&#123; x &#125;&#125; &#123;&#123; y &#125;&#125; &lt;/div&gt;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过上面的代码我们可以看到很多使用上的相同之处，都是把可以复用的一些单独的逻辑抽离到一个单独的函数中去，同时返回组件中需要用到的数据，并且内部会自我维护数据的更新，从而触发视图的更新。</p>
+<p>不过在 React 中，useMouse 如果修改了 x 的值，那么使用 useMouse 的函数就会被重新执行，以此拿到最新的 x，而在 Vue 中利用 Proxy 监听机制，可以做到 setup 函数不重新执行，但 Template 重新渲染的效果。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Hooks 的应用前景还是挺好的，解决了目前前端开发中的诸多痛点。不过 React Hooks 生态还不够完善，而 Vue 只有个 <a href="https://github.com/yyx990803/vue-hooks" target="_blank" rel="noopener">Hooks POC</a>，Vue3.0 很可能会加上，但需要再等等。<br>本篇文章着重解释一下我对 Hooks 的理解，以及 Hooks API 在 Vue 和 React 框架中的不同。也说明一下 Hooks 是个中立的概念，可以在任何框架中使用。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+              <a href="/tags/react/" rel="tag"># react</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/29/init-mac/" rel="prev" title="初始化 Mac 环境">
+      <i class="fa fa-chevron-left"></i> 初始化 Mac 环境
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/29/type-conversion/" rel="next" title="类型转换">
+      类型转换 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hooks-已经到来"><span class="nav-number">1.</span> <span class="nav-text">Hooks 已经到来</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用-Hooks"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要用 Hooks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-Hooks-与-React-Hooks-的差异"><span class="nav-number">1.3.</span> <span class="nav-text">Vue Hooks 与 React Hooks 的差异</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单语法的差异"><span class="nav-number">1.3.1.</span> <span class="nav-text">简单语法的差异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义-hooks-的差异"><span class="nav-number">1.3.2.</span> <span class="nav-text">自定义 hooks 的差异</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">grootfish</p>
+  <div class="site-description" itemprop="description">just record</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">grootfish</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

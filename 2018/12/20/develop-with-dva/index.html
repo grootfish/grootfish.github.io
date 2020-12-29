@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"grootfish.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="使用dva开发用户管理的 CURD 应用">
+<meta name="keywords" content="javascript,React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 dva 开发 React 应用">
+<meta property="og:url" content="https://grootfish.github.io/2018/12/20/develop-with-dva/index.html">
+<meta property="og:site_name" content="Grootfish&#39;s blog">
+<meta property="og:description" content="使用dva开发用户管理的 CURD 应用">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.dropbox.com/s/f2h92qac5cw11z1/Dva.png?dl=0">
+<meta property="og:updated_time" content="2020-12-29T03:10:57.225Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 dva 开发 React 应用">
+<meta name="twitter:description" content="使用dva开发用户管理的 CURD 应用">
+<meta name="twitter:image" content="https://www.dropbox.com/s/f2h92qac5cw11z1/Dva.png?dl=0">
+
+<link rel="canonical" href="https://grootfish.github.io/2018/12/20/develop-with-dva/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>使用 dva 开发 React 应用 | Grootfish's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Grootfish's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">writing something</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://grootfish.github.io/2018/12/20/develop-with-dva/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="grootfish">
+      <meta itemprop="description" content="just record">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Grootfish's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 dva 开发 React 应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-12-20 14:13:56" itemprop="dateCreated datePublished" datetime="2018-12-20T14:13:56+08:00">2018-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-29 11:10:57" itemprop="dateModified" datetime="2020-12-29T11:10:57+08:00">2020-12-29</time>
+              </span>
+
+          
+            <div class="post-description">使用dva开发用户管理的 CURD 应用</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="约定先行"><a href="#约定先行" class="headerlink" title="约定先行"></a>约定先行</h2><ul>
+<li>公共组件统一放到 <code>components</code> 目录下，公共组件建议添加 <code>propTypes</code> 和 <code>defaultProps</code></li>
+<li>页面组件统一放到 <code>routes</code> 目录下<ul>
+<li><code>services</code>目录定义接口调用</li>
+<li><code>models</code>目录定义 Dva 的 models</li>
+<li><code>views</code>目录处理页面渲染逻辑</li>
+<li><code>constants.js</code> 定义组件常量（可选）</li>
+<li><code>config.js</code> 定义组件配置（可选）</li>
+</ul>
+</li>
+<li>所有事件监听的方法都用 <code>handle</code> 开头。</li>
+<li>把事件监听方法传给组件的时候，属性名用 <code>on</code> 开头</li>
+<li>有时候 <code>render()</code> 方法里面的内容会分开到不同函数里面进行，这些函数都以 <code>render*</code> 开头</li>
+<li>组件的内容编写顺序<ol>
+<li><code>static</code> 开头的类属性，如 <code>defaultProps</code>、<code>propTypes</code>。</li>
+<li>构造函数，<code>constructor</code>。</li>
+<li><code>getter/setter</code>方法。</li>
+<li>组件生命周期。</li>
+<li>组件私有方法。</li>
+<li>事件监听方法，<code>handle*</code>。</li>
+<li><code>render*</code>开头的方法。</li>
+<li><code>render()</code> 方法。</li>
+</ol>
+</li>
+</ul>
+<h2 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h2><h3 id="Step-1-安装-dva-cli-并创建应用"><a href="#Step-1-安装-dva-cli-并创建应用" class="headerlink" title="Step 1. 安装 dva-cli 并创建应用"></a>Step 1. 安装 dva-cli 并创建应用</h3><p>先安装 dva-cli，并确保版本是 1.0.0-beta.2 或以上。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm i dva-cli@next -g</span><br><span class="line">$ dva -v</span><br><span class="line">1.0.0-beta.4</span><br></pre></td></tr></table></figure>
+<p>然后创建应用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ dva new dashboard</span><br><span class="line">$ <span class="built_in">cd</span> dashboard</span><br></pre></td></tr></table></figure>
+<h3 id="Step-2-定义路由"><a href="#Step-2-定义路由" class="headerlink" title="Step 2. 定义路由"></a>Step 2. 定义路由</h3><p>修改页面组件<code>index.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = [</span><br><span class="line">  &#123;</span><br><span class="line">    url: <span class="string">"/demands/list"</span>,</span><br><span class="line">    view: <span class="string">"list"</span>,</span><br><span class="line">    models: [<span class="string">"list"</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    url: <span class="string">"/demands/detail"</span>,</span><br><span class="line">    view: <span class="string">"detail"</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<h3 id="Step-3-构造-service-文件"><a href="#Step-3-构造-service-文件" class="headerlink" title="Step 3. 构造 service 文件"></a>Step 3. 构造 service 文件</h3><p>新增<code>src/routes/Demand/services/list.js</code>，内容如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fetch</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">"/api/demand/list"</span>, &#123;</span><br><span class="line">    method: <span class="string">"POST"</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      ...params</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Step-4-构造-models-文件"><a href="#Step-4-构造-models-文件" class="headerlink" title="Step 4. 构造 models 文件"></a>Step 4. 构造 models 文件</h3><p>新增 <code>src/routes/Demand/models/list.js</code>，内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> demandService <span class="keyword">from</span> <span class="string">"../services/list"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; PAGE_SIZE &#125; <span class="keyword">from</span> <span class="string">"../constants"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  namespace: <span class="string">"demands"</span>,</span><br><span class="line">  state: &#123;</span><br><span class="line">    list: [],</span><br><span class="line">    pageNo: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    save(state,&#123;<span class="attr">payload</span>: &#123; <span class="attr">data</span>: list, pageNo &#125;&#125;) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state, list, pageNo &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  effects: &#123;</span><br><span class="line">    *fetch(&#123; payload &#125;, &#123; call, put &#125;) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; result &#125; = <span class="keyword">yield</span> call(demandService.fetch, payload);</span><br><span class="line">      <span class="keyword">const</span> &#123; data &#125; = result;</span><br><span class="line">      <span class="keyword">yield</span> put(&#123;</span><br><span class="line">        type: <span class="string">"save"</span>,</span><br><span class="line">        payload: &#123; data, <span class="attr">pageNo</span>: payload.pageNo &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  subscriptions: &#123;</span><br><span class="line">    setup(&#123; dispatch, history &#125;) &#123;</span><br><span class="line">      <span class="keyword">return</span> history.listen(<span class="function">(<span class="params">&#123; pathname &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (pathname === <span class="string">"/demands/list"</span>) &#123;</span><br><span class="line">          dispatch(&#123;</span><br><span class="line">            type: <span class="string">"fetch"</span>,</span><br><span class="line">            payload: &#123; <span class="attr">pageSize</span>: PAGE_SIZE, <span class="attr">pageNo</span>: <span class="number">1</span> &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Step-5-添加界面，让列表展现出来"><a href="#Step-5-添加界面，让列表展现出来" class="headerlink" title="Step 5. 添加界面，让列表展现出来"></a>Step 5. 添加界面，让列表展现出来</h3><p>我们把组件存在 <code>src/routes/Demand/views/list.js</code> 里</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"../index.less"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demands</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &lt;div className="demands"&gt;需求列表&lt;/div&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Demands;</span><br></pre></td></tr></table></figure>
+<h3 id="Step-7-处理-loading-状态"><a href="#Step-7-处理-loading-状态" class="headerlink" title="Step 7. 处理 loading 状态"></a>Step 7. 处理 loading 状态</h3><p>dva 有一个管理 effects 执行的 hook，并基于此封装了 dva-loading 插件。通过这个插件，我们可以不必一遍遍地写 showLoading 和 hideLoading，当发起请求时，插件会自动设置数据里的 loading 状态为 true 或 false 。然后我们在渲染 components 时绑定并根据这个数据进行渲染。</p>
+<p>然后在 <code>src/routes/Demand/views/list.js</code> 里绑定 loading 数据：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ loading: state.loading.models.users,</span><br></pre></td></tr></table></figure>
+<h3 id="Step-8-处理数据-CURD"><a href="#Step-8-处理数据-CURD" class="headerlink" title="Step 8. 处理数据 CURD"></a>Step 8. 处理数据 CURD</h3><ul>
+<li><p>CURD 的功能调整基本都可以按照以下三步进行：</p>
+<ol>
+<li>services</li>
+<li>models</li>
+<li>views</li>
+</ol>
+</li>
+<li><p>我们以删除功能为例</p>
+<p>1 . services, 修改 <code>src/routes/Demand/services/list.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">`/api/demand/delete/<span class="subst">$&#123;id&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2 . models, 修改 <code>src/routes/Demand/models/list.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">*remove(&#123; payload &#125;, &#123; call, put &#125;) &#123;</span><br><span class="line">    <span class="keyword">yield</span> call(demandService.remove, payload);</span><br><span class="line">    <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'fetch'</span>, <span class="attr">payload</span>: &#123; <span class="attr">pageSize</span>: PAGE_SIZE, <span class="attr">pageNo</span>: <span class="number">1</span> &#125; &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>3 . views,修改 src/routes/Demand/views/list.js，替换 handleDelete 内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dispatch(&#123; <span class="attr">type</span>: <span class="string">"demands/remove"</span>, <span class="attr">payload</span>: id &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="技术栈一览"><a href="#技术栈一览" class="headerlink" title="技术栈一览"></a>技术栈一览</h2><p><img src="https://www.dropbox.com/s/f2h92qac5cw11z1/Dva.png?dl=0" alt="dva技术栈"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/10/command-in-terminal/" rel="prev" title="终端命令和快捷键">
+      <i class="fa fa-chevron-left"></i> 终端命令和快捷键
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/04/TCP-IP-and-OIS/" rel="next" title="TCP/IP 协议栈及 OSI 参考模型">
+      TCP/IP 协议栈及 OSI 参考模型 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#约定先行"><span class="nav-number">1.</span> <span class="nav-text">约定先行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发步骤"><span class="nav-number">2.</span> <span class="nav-text">开发步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-1-安装-dva-cli-并创建应用"><span class="nav-number">2.1.</span> <span class="nav-text">Step 1. 安装 dva-cli 并创建应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-2-定义路由"><span class="nav-number">2.2.</span> <span class="nav-text">Step 2. 定义路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-3-构造-service-文件"><span class="nav-number">2.3.</span> <span class="nav-text">Step 3. 构造 service 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-4-构造-models-文件"><span class="nav-number">2.4.</span> <span class="nav-text">Step 4. 构造 models 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-5-添加界面，让列表展现出来"><span class="nav-number">2.5.</span> <span class="nav-text">Step 5. 添加界面，让列表展现出来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-7-处理-loading-状态"><span class="nav-number">2.6.</span> <span class="nav-text">Step 7. 处理 loading 状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-8-处理数据-CURD"><span class="nav-number">2.7.</span> <span class="nav-text">Step 8. 处理数据 CURD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术栈一览"><span class="nav-number">3.</span> <span class="nav-text">技术栈一览</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">grootfish</p>
+  <div class="site-description" itemprop="description">just record</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">grootfish</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

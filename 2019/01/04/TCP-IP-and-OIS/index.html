@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"grootfish.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="TCP/IP 协议栈及 OSI 参考模型详解">
+<meta name="keywords" content="http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP 协议栈及 OSI 参考模型">
+<meta property="og:url" content="https://grootfish.github.io/2019/01/04/TCP-IP-and-OIS/index.html">
+<meta property="og:site_name" content="Grootfish&#39;s blog">
+<meta property="og:description" content="TCP/IP 协议栈及 OSI 参考模型详解">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2019/01/04/5c2f100fc3cf7.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/04/5c2f112fd8f70.png">
+<meta property="og:updated_time" content="2020-12-29T03:10:57.224Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP&#x2F;IP 协议栈及 OSI 参考模型">
+<meta name="twitter:description" content="TCP/IP 协议栈及 OSI 参考模型详解">
+<meta name="twitter:image" content="https://i.loli.net/2019/01/04/5c2f100fc3cf7.png">
+
+<link rel="canonical" href="https://grootfish.github.io/2019/01/04/TCP-IP-and-OIS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>TCP/IP 协议栈及 OSI 参考模型 | Grootfish's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Grootfish's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">writing something</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://grootfish.github.io/2019/01/04/TCP-IP-and-OIS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="grootfish">
+      <meta itemprop="description" content="just record">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Grootfish's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TCP/IP 协议栈及 OSI 参考模型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-04 15:35:42" itemprop="dateCreated datePublished" datetime="2019-01-04T15:35:42+08:00">2019-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-29 11:10:57" itemprop="dateModified" datetime="2020-12-29T11:10:57+08:00">2020-12-29</time>
+              </span>
+
+          
+            <div class="post-description">TCP/IP 协议栈及 OSI 参考模型详解</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="OSI-参考模型"><a href="#OSI-参考模型" class="headerlink" title="OSI 参考模型"></a>OSI 参考模型</h2><p>OSI 参考模型（Open System Interconnection Reference Model，开放式系统互联通信参考模型），是 ISO （国际标准化组织）组织在 1985 年研究的网络互联模型。该体系结构标准定义了网络互连的七层框架（物理层、数据链路层、网络层、传输层、会话层、表示层和应用层），在这一框架下进一步详细规定了每一层的功能，以实现开放系统环境中的互连性、互操作性和应用的可移植性。</p>
+<h3 id="ISO-通信功能七个层次的划分原则是："><a href="#ISO-通信功能七个层次的划分原则是：" class="headerlink" title="ISO 通信功能七个层次的划分原则是："></a>ISO 通信功能七个层次的划分原则是：</h3><ul>
+<li>网路中各节点都有相同的层次；</li>
+<li>不同节点的同等层具有相同的功能；</li>
+<li>同一节点内相邻层之间通过接口通信；</li>
+<li>每一层使用下层提供的服务，并向其上层提供服务；</li>
+<li>不同节点的同等层按照协议实现对等层之间的通信。</li>
+</ul>
+<h3 id="OSI-参考模型具有以下优点："><a href="#OSI-参考模型具有以下优点：" class="headerlink" title="OSI 参考模型具有以下优点："></a>OSI 参考模型具有以下优点：</h3><ul>
+<li>简化了相关的网络操作；</li>
+<li>提供设备间的兼容性和标准接口；</li>
+<li>促进标准化工作；</li>
+<li>结构上可以分隔，各层可以独立修改或者扩充；</li>
+<li>易于实现和维护；</li>
+<li>有利于大家学习、理解数据通讯网络。</li>
+</ul>
+<h3 id="各层功能详述如下"><a href="#各层功能详述如下" class="headerlink" title="各层功能详述如下"></a>各层功能详述如下</h3><ol>
+<li>物理层 (Physical Layer)：物理层是 OSI 参考模型的最低层，它利用传输介质为数据链路层提供物理连接。它主要关心的是通过物理链路从一个节点向另一个节点传送比特流，物理链路可能是铜线、卫星、微波或其他的通讯媒介。它关心的问题有：多少伏电压代表 1 ？多少伏电压代表 0 ？时钟速率是多少？采用全双工还是半双工传输？总的来说物理层关心的是链路的机械、电气、功能和规程特性。</li>
+<li>数据链路层 (Data Link Layer)：数据链路层是为网络层提供服务的，解决两个相邻结点之间的通信问题，传送的协议数据单元称为数据帧。数据帧中包含物理地址（又称 MAC 地址）、控制码、数据及校验码等信息。该层的主要作用是通过校验、确认和反馈重发等手段，将不可靠的物理链路转换成对网络层来说无差错的数据链路。此外，数据链路层还要协调收发双方的数据传输速率，即进行流量控制，以防止接收方因来不及处理发送方来的高速数据而导致缓冲器溢出及线路阻塞。</li>
+<li>网络层 (Network Layer)：网络层是为传输层提供服务的，传送的协议数据单元称为数据包（分组）。该层的主要作用是解决如何使数据包通过各结点传送的问题，即通过路径选择算法（路由）将数据包送到目的地。另外，为避免通信子网中出现过多的数据包而造成网络阻塞，需要对流入的数据包数量进行控制（拥塞控制）。当数据包要跨越多个通信子网才能到达目的地时，还要解决网际互连的问题。</li>
+<li>传输层 (Transport Layer)：传输层的作用是为上层协议提供端到端的可靠和透明的数据传输服务，包括处理差错控制和流量控制等问题，传输层传送的协议数据单元称为数据段（报文）。该层向高层屏蔽了下层数据通信的细节，使高层用户看到的只是在两个传输实体间的一条主机到主机的、可由用户控制和设定的、可靠的数据通路。</li>
+<li>会话层 (Session Layer)：会话层主要功能是管理和协调不同主机上各种进程之间的通信（对话），即负责建立、管理和终止应用程序之间的会话。会话层得名的原因是它很类似于两个实体间的会话概念。例如，一个交互的用户会话以登录到计算机开始，以注销结束。</li>
+<li>表示层 (Presentation Layer)：表示层处理流经结点的数据编码的表示方式问题，以保证一个系统应用层发出的信息可被另一系统的应用层读出。如果必要，该层可提供一种标准表示形式，用于将计算机内部的多种数据表示格式转换成网络通信中采用的标准表示形式。数据压缩和加密也是表示层可提供的转换功能之一。</li>
+<li>应用层 (Application Layer)：应用层是 OSI 参考模型的最高层，是用户与网络的接口。该层通过应用程序来完成网络用户的应用需求，如文件传输、收发电子邮件等。</li>
+</ol>
+<p><img src="https://i.loli.net/2019/01/04/5c2f100fc3cf7.png" alt="OSI模型.png"></p>
+<h3 id="TCP-IP-参考模型"><a href="#TCP-IP-参考模型" class="headerlink" title="TCP/IP 参考模型"></a>TCP/IP 参考模型</h3><p>通常人们认为 OSI 模型的最上面三层（应用层、表示层和会话层）在 TCP/IP 组中是一个应用层。由于 TCP/IP 有一个相对较弱的会话层，由 TCP 和 RTP 下的打开和关闭连接组成，并且在 TCP 和 UDP 下的各种应用提供不同的端口号，这些功能能够被单个的应用程序（或者那些应用程序所使用的库）增加。与此相似的是，IP 是按照将它下面的网络当作一个黑盒子的思想设计的，这样在讨论 TCP/IP 的时候就可以把它当作一个独立的层。<br><img src="https://i.loli.net/2019/01/04/5c2f112fd8f70.png" alt="TCP:IP协议.png"></p>
+<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>该层包括所有和应用程序协同工作，利用基础网络交换应用程序专用的数据的协议。 应用层是大多数普通与网络相关的程序为了通过网络与其他程序通信所使用的层。这个层的处理过程是应用特有的；数据从网络相关的程序以这种应用内部使用的格式进行传送，然后被编码成标准协议的格式。</p>
+<p>一些特定的程序被认为运行在这个层上。它们提供服务直接支持用户应用。这些程序和它们对应的协议包括 HTTP（万维网服务）、FTP（文件传输）、SMTP（电子邮件）、SSH（安全远程登陆）、DNS（名称<-> IP 地址寻找）以及许多其他协议。 一旦从应用程序来的数据被编码成一个标准的应用层协议，它将被传送到 IP 栈的下一层。</-></p>
+<p>在传输层，应用程序最常用的是 TCP 或者 UDP，并且服务器应用程序经常与一个公开的端口号相联系。服务器应用程序的端口由互联网号码分配局（IANA）正式地分配，但是现今一些新协议的开发者经常选择它们自己的端口号。由于在同一个系统上很少超过少数几个的服务器应用，端口冲突引起的问题很少。应用软件通常也允许用户强制性地指定端口号作为运行参数。</p>
+<p>链接外部的客户端程序通常使用系统分配的一个随机端口号。监听一个端口并且通过服务器将那个端口发送到应用的另外一个副本以创建对等链接（如 IRC 上的 dcc 文件传输）的应用也可以使用一个随机端口，但是应用程序通常允许定义一个特定的端口范围的规范以允许端口能够通过实现网络地址转换（NAT）的路由器映射到内部。</p>
+<p>每一个应用层（TCP/IP 参考模型的最高层）协议一般都会使用到两个传输层协议之一： 面向连接的 TCP 传输控制协议和无连接的包传输的 UDP 用户数据报文协议。 常用的应用层协议有：</p>
+<ul>
+<li>运行在 TCP 协议上的协议：<ul>
+<li>HTTP（Hypertext Transfer Protocol，超文本传输协议），主要用于普通浏览。</li>
+<li>HTTPS（Hypertext Transfer Protocol over Secure Socket Layer, or HTTP over SSL，安全超文本传输协议）,HTTP 协议的安全版本。</li>
+<li>FTP（File Transfer Protocol，文件传输协议），由名知义，用于文件传输。</li>
+<li>POP3（Post Office Protocol, version 3，邮局协议），收邮件用。</li>
+<li>SMTP（Simple Mail Transfer Protocol，简单邮件传输协议），用来发送电子邮件。</li>
+<li>TELNET（Teletype over the Network，网络电传），通过一个终端（terminal）登陆到网络。</li>
+<li>SSH（Secure Shell，用于替代安全性差的 TELNET），用于加密安全登陆用。</li>
+</ul>
+</li>
+<li>运行在 UDP 协议上的协议：<ul>
+<li>BOOTP（Boot Protocol，启动协议），应用于无盘设备。</li>
+<li>NTP（Network Time Protocol，网络时间协议），用于网络同步。</li>
+<li>DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），动态配置 IP 地址。</li>
+</ul>
+</li>
+<li>其他：<ul>
+<li>DNS（Domain Name Service，域名服务），用于完成地址查找，邮件转发等工作（运行在 TCP 和 UDP 协议上）。</li>
+<li>ECHO（Echo Protocol，回绕协议），用于查错及测量应答时间（运行在 TCP 和 UDP 协议上）。</li>
+<li>SNMP（Simple Network Management Protocol，简单网络管理协议），用于网络信息的收集和网络管理。</li>
+<li>ARP（Address Resolution Protocol，地址解析协议），用于动态解析以太网硬件的地址。</li>
+</ul>
+</li>
+</ul>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><p>传输层（transport layer）的协议，能够解决诸如端到端可靠性（“数据是否已经到达目的地？”）和保证数据按照正确的顺序到达这样的问题。在 TCP/IP 协议组中，传输协议也包括所给数据应该送给哪个应用程序。 在 TCP/IP 协议组中技术上位于这个层的动态路由协议通常被认为是网络层的一部分；一个例子就是 OSPF（IP 协议 89）。 TCP（IP 协议 6）是一个“可靠的”、面向链接的传输机制，它提供一种可靠的字节流保证数据完整、无损并且按顺序到达。TCP 尽量连续不断地测试网络的负载并且控制发送数据的速度以避免网络过载。另外，TCP 试图将数据按照规定的顺序发送。这是它与 UDP 不同之处，这在实时数据流或者路由高网络层丢失率应用的时候可能成为一个缺陷。 较新的 SCTP 也是一个“可靠的”、面向链接的传输机制。它是面向纪录而不是面向字节的，它在一个单独的链接上提供通过多路复用提供的多个子流。它也提供多路自寻址支持，其中链接终端能够被多个 IP 地址表示（代表多个实体接口），这样的话即使其中一个连接失败了也不中断。它最初是为电话应用开发的（在 IP 上传输 SS7），但是也可以用于其他的应用。 UDP（IP 协议号 17）是一个无链接的数据报协议。它是一个“尽力传递”（best effort）或者说“不可靠”协议——不是因为它特别不可靠，而是因为它不检查数据包是否已经到达目的地，并且不保证它们按顺序到达。如果一个应用程序需要这些特性，那它必须自行检测和判断，或者使用 TCP 协议。 UDP 的典型性应用是如流媒体（音频和视频等）这样按时到达比可靠性更重要的应用，或者如 DNS 查找这样的简单查询／响应应用，如果创建可靠的链接所作的额外工作将是不成比例地大。 DCCP 当前正由 IEFT 开发。它提供 TCP 流动控制语义，但对于用户来说保留 UDP 的数据报服务模型。 TCP 和 UDP 都用来支持一些高层的应用。任何给定网络地址的应用通过它们的 TCP 或者 UDP 端口号区分。根据惯例使一些大众所知的端口与特定的应用相联系。 RTP 是为如音频和视频流这样的实时数据设计的数据报协议。RTP 是使用 UDP 包格式作为基础的会话层，然而据说它位于因特网协议栈的传输层。</p>
+<h4 id="网络互连层"><a href="#网络互连层" class="headerlink" title="网络互连层"></a>网络互连层</h4><p>TCP/IP 协议族中的网络互连层（internet layer）在 OSI 模型中叫做网络层（network layer）。</p>
+<p>正如最初所定义的，网络层解决在一个单一网络上传输数据包的问题。类似的协议有 X.25 和 ARPANET 的 Host/IMP Protocol。 随着因特网思想的出现，在这个层上添加附加的功能，也就是将数据从源网络传输到目的网络。这就牵涉到在网络组成的网上选择路径将数据包传输，也就是因特网。 在因特网协议组中，IP 完成数据从源发送到目的的基本任务。IP 能够承载多种不同的高层协议的数据；这些协议使用一个唯一的 IP 协议号进行标识。ICMP 和 IGMP 分别是 1 和 2。 一些 IP 承载的协议，如 ICMP（用来发送关于 IP 发送的诊断信息）和 IGMP（用来管理多播数据），它们位于 IP 层之上但是完成网络层的功能，这表明因特网和 OSI 模型之间的不兼容性。所有的路由协议，如 BGP、OSPF、和 RIP 实际上也是网络层的一部分，尽管它们似乎应该属于更高的协议栈。</p>
+<h4 id="网络接口层"><a href="#网络接口层" class="headerlink" title="网络接口层"></a>网络接口层</h4><p>网络接口层实际上并不是因特网协议组中的一部分，但是它是数据包从一个设备的网络层传输到另外一个设备的网络层的方法。这个过程能够在网卡的软件驱动程序中控制，也可以在韧体或者专用芯片中控制。这将完成如添加报头准备发送、通过实体介质实际发送这样一些数据链路功能。另一端，链路层将完成数据帧接收、去除报头并且将接收到的包传到网络层。 然而，链路层并不经常这样简单。它也可能是一个虚拟专有网络（VPN）或者隧道，在这里从网络层来的包使用隧道协议和其他（或者同样的）协议组发送而不是发送到实体的接口上。VPN 和信道通常预先建好，并且它们有一些直接发送到实体接口所没有的特殊特点（例如，它可以加密经过它的数据）。由于现在链路“层”是一个完整的网络，这种协议组的递归使用可能引起混淆。但是它是一个实现常见复杂功能的一个优秀方法。（尽管需要注意预防一个已经封装并且经隧道发送下去的数据包进行再次地封装和发送）。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/http/" rel="tag"># http</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/20/develop-with-dva/" rel="prev" title="使用 dva 开发 React 应用">
+      <i class="fa fa-chevron-left"></i> 使用 dva 开发 React 应用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/30/npmpackages/" rel="next" title="如何使用 npm 管理包">
+      如何使用 npm 管理包 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI-参考模型"><span class="nav-number">1.</span> <span class="nav-text">OSI 参考模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ISO-通信功能七个层次的划分原则是："><span class="nav-number">1.1.</span> <span class="nav-text">ISO 通信功能七个层次的划分原则是：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSI-参考模型具有以下优点："><span class="nav-number">1.2.</span> <span class="nav-text">OSI 参考模型具有以下优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各层功能详述如下"><span class="nav-number">1.3.</span> <span class="nav-text">各层功能详述如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP-参考模型"><span class="nav-number">1.4.</span> <span class="nav-text">TCP/IP 参考模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用层"><span class="nav-number">1.4.1.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#传输层"><span class="nav-number">1.4.2.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络互连层"><span class="nav-number">1.4.3.</span> <span class="nav-text">网络互连层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络接口层"><span class="nav-number">1.4.4.</span> <span class="nav-text">网络接口层</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">grootfish</p>
+  <div class="site-description" itemprop="description">just record</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">grootfish</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

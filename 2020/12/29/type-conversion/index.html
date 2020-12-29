@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"grootfish.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前端基础">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类型转换">
+<meta property="og:url" content="https://grootfish.github.io/2020/12/29/type-conversion/index.html">
+<meta property="og:site_name" content="Grootfish&#39;s blog">
+<meta property="og:description" content="前端基础">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfrw0r9brsj30yr0u0q97.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfrw023janj30su0q0ah3.jpg">
+<meta property="og:updated_time" content="2020-12-29T03:10:57.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类型转换">
+<meta name="twitter:description" content="前端基础">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfrw0r9brsj30yr0u0q97.jpg">
+
+<link rel="canonical" href="https://grootfish.github.io/2020/12/29/type-conversion/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>类型转换 | Grootfish's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Grootfish's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">writing something</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://grootfish.github.io/2020/12/29/type-conversion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="grootfish">
+      <meta itemprop="description" content="just record">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Grootfish's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          类型转换
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-29 11:10:57" itemprop="dateCreated datePublished" datetime="2020-12-29T11:10:57+08:00">2020-12-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/前端基础/" itemprop="url" rel="index"><span itemprop="name">前端基础</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">前端基础</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><hr>
+<h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><blockquote>
+<p>在<code>ECMAScript</code>中，引用类型是一种数据结构，用于将数据和功能组织在一起。</p>
+</blockquote>
+<p>我们通常所说的对象，就是某个特定引用类型的实例。</p>
+<p>在<code>ECMAScript</code>关于类型的定义中，只给出了<code>Object</code>类型，实际上，我们平时使用的很多引用类型的变量，并不是由<code>Object</code>构造的，但是它们原型链的终点都是<code>Object</code>，这些类型都属于引用类型。</p>
+<ul>
+<li><code>Array</code> 数组</li>
+<li><code>Date</code> 日期</li>
+<li><code>RegExp</code> 正则</li>
+<li><code>Function</code> 函数</li>
+</ul>
+<h3 id="6-1-包装类型"><a href="#6-1-包装类型" class="headerlink" title="6.1 包装类型"></a>6.1 包装类型</h3><p>为了便于操作基本类型值，<code>ECMAScript</code>还提供了几个特殊的引用类型，他们是基本类型的包装类型：</p>
+<ul>
+<li><code>Boolean</code></li>
+<li><code>Number</code></li>
+<li><code>String</code></li>
+</ul>
+<p>注意包装类型和原始类型的区别：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> === <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>); <span class="comment">// false</span></span><br><span class="line"><span class="number">123</span> === <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>); <span class="comment">// false</span></span><br><span class="line"><span class="string">'ConardLi'</span> === <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'ConardLi'</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'ConardLi'</span>)); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="string">'ConardLi'</span>); <span class="comment">// string</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>引用类型和包装类型的主要区别就是对象的生存期，使用new操作符创建的引用类型的实例，在执行流离开当前作用域之前都一直保存在内存中，而自基本类型则只存在于一行代码的执行瞬间，然后立即被销毁，这意味着我们不能在运行时为基本类型添加属性和方法。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'ConardLi'</span></span><br><span class="line">name.color = <span class="string">'red'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(name.color); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-2-装箱和拆箱"><a href="#6-2-装箱和拆箱" class="headerlink" title="6.2 装箱和拆箱"></a>6.2 装箱和拆箱</h3><ul>
+<li><p>装箱转换：把基本类型转换为对应的包装类型</p>
+</li>
+<li><p>拆箱操作：把引用类型转换为基本类型</p>
+</li>
+</ul>
+<p>既然原始类型不能扩展属性和方法，那么我们是如何使用原始类型调用方法的呢？</p>
+<p>每当我们操作一个基础类型时，后台就会自动创建一个包装类型的对象，从而让我们能够调用一些方法和属性，例如下面的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"ConardLi"</span>;</span><br><span class="line"><span class="keyword">var</span> name2 = name.substring(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>实际上发生了以下几个过程：</p>
+<ul>
+<li>创建一个<code>String</code>的包装类型实例</li>
+<li>在实例上调用<code>substring</code>方法</li>
+<li>销毁实例</li>
+</ul>
+<p>也就是说，我们使用基本类型调用方法，就会自动进行装箱和拆箱操作，相同的，我们使用<code>Number</code>和<code>Boolean</code>类型时，也会发生这个过程。</p>
+<p>从引用类型到基本类型的转换，也就是拆箱的过程中，会遵循<code>ECMAScript规范</code>规定的<code>toPrimitive</code>原则，一般会调用引用类型的<code>valueOf</code>和<code>toString</code>方法，你也可以直接重写<code>toPeimitive</code>方法。一般转换成不同类型的值遵循的原则不同，例如：</p>
+<ul>
+<li>引用类型转换为<code>Number</code>类型，先调用<code>valueOf</code>，再调用<code>toString</code></li>
+<li>引用类型转换为<code>String</code>类型，先调用<code>toString</code>，再调用<code>valueOf</code></li>
+</ul>
+<p>若<code>valueOf</code>和<code>toString</code>都不存在，或者没有返回基本类型，则抛出<code>TypeError</code>异常。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  valueOf: <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(<span class="string">'valueOf'</span>); <span class="keyword">return</span> <span class="number">123</span>; &#125;,</span><br><span class="line">  toString: <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(<span class="string">'toString'</span>); <span class="keyword">return</span> <span class="string">'ConardLi'</span>; &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj - <span class="number">1</span>);   <span class="comment">// valueOf   122</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;obj&#125;</span>ConardLi`</span>); <span class="comment">// toString  ConardLiConardLi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.toPrimitive]: <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(<span class="string">'toPrimitive'</span>); <span class="keyword">return</span> <span class="number">123</span>; &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj2 - <span class="number">1</span>);   <span class="comment">// valueOf   122</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj3 = &#123;</span><br><span class="line">  valueOf: <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(<span class="string">'valueOf'</span>); <span class="keyword">return</span> &#123;&#125;; &#125;,</span><br><span class="line">  toString: <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(<span class="string">'toString'</span>); <span class="keyword">return</span> &#123;&#125;; &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj3 - <span class="number">1</span>);</span><br><span class="line"><span class="comment">// valueOf</span></span><br><span class="line"><span class="comment">// toString</span></span><br><span class="line"><span class="comment">// TypeError</span></span><br></pre></td></tr></table></figure>
+<p>除了程序中的自动拆箱和自动装箱，我们还可以手动进行拆箱和装箱操作。我们可以直接调用包装类型的<code>valueOf</code>或<code>toString</code>，实现拆箱操作：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num =<span class="keyword">new</span> <span class="built_in">Number</span>(<span class="string">"123"</span>);</span><br><span class="line"><span class="built_in">console</span>.log( <span class="keyword">typeof</span> num.valueOf() ); <span class="comment">//number</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="keyword">typeof</span> num.toString() ); <span class="comment">//string</span></span><br></pre></td></tr></table></figure>
+<h2 id="七、类型转换"><a href="#七、类型转换" class="headerlink" title="七、类型转换"></a>七、类型转换</h2><p>因为<code>JavaScript</code>是弱类型的语言，所以类型转换发生非常频繁，上面我们说的装箱和拆箱其实就是一种类型转换。</p>
+<p>类型转换分为两种，隐式转换即程序自动进行的类型转换，强制转换即我们手动进行的类型转换。</p>
+<p>强制转换这里就不再多提及了，下面我们来看看让人头疼的可能发生隐式类型转换的几个场景，以及如何转换：</p>
+<h3 id="7-1-类型转换规则"><a href="#7-1-类型转换规则" class="headerlink" title="7.1 类型转换规则"></a>7.1 类型转换规则</h3><p>如果发生了隐式转换，那么各种类型互转符合下面的规则：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfrw0r9brsj30yr0u0q97.jpg" alt></p>
+<h3 id="7-2-if语句和逻辑语句"><a href="#7-2-if语句和逻辑语句" class="headerlink" title="7.2 if语句和逻辑语句"></a>7.2 if语句和逻辑语句</h3><p>在<code>if</code>语句和逻辑语句中，如果只有单个变量，会先将变量转换为<code>Boolean</code>值，只有下面几种情况会转换成<code>false</code>，其余被转换成<code>true</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span></span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line"><span class="string">''</span></span><br><span class="line"><span class="literal">NaN</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-3-各种运数学算符"><a href="#7-3-各种运数学算符" class="headerlink" title="7.3 各种运数学算符"></a>7.3 各种运数学算符</h3><p>我们在对各种非<code>Number</code>类型运用数学运算符(<code>- * /</code>)时，会先将非<code>Number</code>类型转换为<code>Number</code>类型;</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> - <span class="literal">true</span> <span class="comment">// 0</span></span><br><span class="line"><span class="number">1</span> - <span class="literal">null</span> <span class="comment">//  1</span></span><br><span class="line"><span class="number">1</span> * <span class="literal">undefined</span> <span class="comment">//  NaN</span></span><br><span class="line"><span class="number">2</span> * [<span class="string">'5'</span>] <span class="comment">//  10</span></span><br></pre></td></tr></table></figure>
+<p>注意<code>+</code>是个例外，执行<code>+</code>操作符时：</p>
+<ul>
+<li>1.当一侧为<code>String</code>类型，被识别为字符串拼接，并会优先将另一侧转换为字符串类型。</li>
+<li>2.当一侧为<code>Number</code>类型，另一侧为原始类型，则将原始类型转换为<code>Number</code>类型。</li>
+<li>3.当一侧为<code>Number</code>类型，另一侧为引用类型，将引用类型和<code>Number</code>类型转换成字符串后拼接。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">123</span> + <span class="string">'123'</span> <span class="comment">// 123123   （规则1）</span></span><br><span class="line"><span class="number">123</span> + <span class="literal">null</span>  <span class="comment">// 123    （规则2）</span></span><br><span class="line"><span class="number">123</span> + <span class="literal">true</span> <span class="comment">// 124    （规则2）</span></span><br><span class="line"><span class="number">123</span> + &#123;&#125;  <span class="comment">// 123[object Object]    （规则3）</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-4"><a href="#7-4" class="headerlink" title="7.4 =="></a>7.4 ==</h3><p>使用<code>==</code>时，若两侧类型相同，则比较结果和<code>===</code>相同，否则会发生隐式转换，使用<code>==</code>时发生的转换可以分为几种不同的情况（只考虑两侧类型不同）：</p>
+<ul>
+<li><strong>1.NaN</strong></li>
+</ul>
+<p><code>NaN</code>和其他任何类型比较永远返回<code>false</code>(包括和他自己)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NaN</span> == <span class="literal">NaN</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>2.Boolean</strong></li>
+</ul>
+<p><code>Boolean</code>和其他任何类型比较，<code>Boolean</code>首先被转换为<code>Number</code>类型。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> == <span class="number">1</span>  <span class="comment">// true</span></span><br><span class="line"><span class="literal">true</span> == <span class="string">'2'</span>  <span class="comment">// false</span></span><br><span class="line"><span class="literal">true</span> == [<span class="string">'1'</span>]  <span class="comment">// true</span></span><br><span class="line"><span class="literal">true</span> == [<span class="string">'2'</span>]  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里注意一个可能会弄混的点：<code>undefined、null</code>和<code>Boolean</code>比较，虽然<code>undefined、null</code>和<code>false</code>都很容易被想象成假值，但是他们比较结果是<code>false</code>，原因是<code>false</code>首先被转换成<code>0</code>：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span> == <span class="literal">false</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">false</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>3.String和Number</strong></li>
+</ul>
+<p><code>String</code>和<code>Number</code>比较，先将<code>String</code>转换为<code>Number</code>类型。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">123</span> == <span class="string">'123'</span> <span class="comment">// true</span></span><br><span class="line"><span class="string">''</span> == <span class="number">0</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>4.null和undefined</strong></li>
+</ul>
+<p><code>null == undefined</code>比较结果是<code>true</code>，除此之外，<code>null、undefined</code>和其他任何结果的比较值都为<code>false</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span> <span class="comment">// true</span></span><br><span class="line"><span class="literal">null</span> == <span class="string">''</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> == <span class="number">0</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">false</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">undefined</span> == <span class="string">''</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">undefined</span> == <span class="number">0</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">undefined</span> == <span class="literal">false</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>5.原始类型和引用类型</strong></li>
+</ul>
+<p>当原始类型和引用类型做比较时，对象类型会依照<code>ToPrimitive</code>规则转换为原始类型:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'[object Object]'</span> == &#123;&#125; <span class="comment">// true</span></span><br><span class="line"><span class="string">'1,2,3'</span> == [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>来看看下面这个比较：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] == ![] <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><code>!</code>的优先级高于<code>==</code>，<code>![]</code>首先会被转换为<code>false</code>，然后根据上面第三点，<code>false</code>转换成<code>Number</code>类型<code>0</code>，左侧<code>[]</code>转换为<code>0</code>，两侧比较相等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="literal">null</span>] == <span class="literal">false</span> <span class="comment">// true</span></span><br><span class="line">[<span class="literal">undefined</span>] == <span class="literal">false</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>根据数组的<code>ToPrimitive</code>规则，数组元素为<code>null</code>或<code>undefined</code>时，该元素被当做空字符串处理，所以<code>[null]、[undefined]</code>都会被转换为<code>0</code>。</p>
+<p>所以，说了这么多，推荐使用<code>===</code>来判断两个值是否相等…</p>
+<h3 id="7-5-一道有意思的面试题"><a href="#7-5-一道有意思的面试题" class="headerlink" title="7.5 一道有意思的面试题"></a>7.5 一道有意思的面试题</h3><p>一道经典的面试题，如何让：<code>a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3</code>。</p>
+<p>根据上面的拆箱转换，以及<code>==</code>的隐式转换，我们可以轻松写出答案：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = &#123;</span><br><span class="line">   value:[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>],</span><br><span class="line">   valueOf: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="keyword">this</span>.value.pop(); &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="八、判断JavaScript数据类型的方式"><a href="#八、判断JavaScript数据类型的方式" class="headerlink" title="八、判断JavaScript数据类型的方式"></a>八、判断JavaScript数据类型的方式</h2><h3 id="8-1-typeof"><a href="#8-1-typeof" class="headerlink" title="8.1 typeof"></a>8.1 typeof</h3><p><strong>适用场景</strong></p>
+<p><code>typeof</code>操作符可以准确判断一个变量是否为下面几个原始类型：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="string">'ConardLi'</span>  <span class="comment">// string</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="number">123</span>  <span class="comment">// number</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">true</span>  <span class="comment">// boolean</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="built_in">Symbol</span>()  <span class="comment">// symbol</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>你还可以用它来判断函数类型：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;  <span class="comment">// function</span></span><br></pre></td></tr></table></figure>
+<p><strong>不适用场景</strong></p>
+<p>当你用<code>typeof</code>来判断引用类型时似乎显得有些乏力了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> [] <span class="comment">// object</span></span><br><span class="line"><span class="keyword">typeof</span> &#123;&#125; <span class="comment">// object</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">Date</span>() <span class="comment">// object</span></span><br><span class="line"><span class="keyword">typeof</span> /^\d*$/; <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
+<p>除函数外所有的引用类型都会被判定为<code>object</code>。</p>
+<p>另外<code>typeof null === &#39;object&#39;</code>也会让人感到头痛，这是在<code>JavaScript</code>初版就流传下来的<code>bug</code>，后面由于修改会造成大量的兼容问题就一直没有被修复…</p>
+<h3 id="8-2-instanceof"><a href="#8-2-instanceof" class="headerlink" title="8.2 instanceof"></a>8.2 instanceof</h3><p><code>instanceof</code>操作符可以帮助我们判断引用类型具体是什么类型的对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>() <span class="keyword">instanceof</span> <span class="built_in">Date</span> <span class="comment">// true</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">RegExp</span>() <span class="keyword">instanceof</span> <span class="built_in">RegExp</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>我们先来回顾下原型链的几条规则：</p>
+<ul>
+<li>1.所有引用类型都具有对象特性，即可以自由扩展属性</li>
+<li>2.所有引用类型都具有一个<code>__proto__</code>（隐式原型）属性，是一个普通对象</li>
+<li>3.所有的函数都具有<code>prototype</code>（显式原型）属性，也是一个普通对象</li>
+<li>4.所有引用类型<code>__proto__</code>值指向它构造函数的<code>prototype</code></li>
+<li>5.当试图得到一个对象的属性时，如果变量本身没有这个属性，则会去他的<code>__proto__</code>中去找</li>
+</ul>
+<p><code>[] instanceof Array</code>实际上是判断<code>Array.prototype</code>是否在<code>[]</code>的原型链上。</p>
+<p>所以，使用<code>instanceof</code>来检测数据类型，不会很准确，这不是它设计的初衷：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;  <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>另外，使用<code>instanceof</code>也不能检测基本数据类型，所以<code>instanceof</code>并不是一个很好的选择。</p>
+<h3 id="8-3-toString"><a href="#8-3-toString" class="headerlink" title="8.3 toString"></a>8.3 toString</h3><p>上面我们在拆箱操作中提到了<code>toString</code>函数，我们可以调用它实现从引用类型的转换。</p>
+<blockquote>
+<p>每一个引用类型都有<code>toString</code>方法，默认情况下，<code>toString()</code>方法被每个<code>Object</code>对象继承。如果此方法在自定义对象中未被覆盖，<code>toString()</code> 返回 <code>&quot;[object type]&quot;</code>，其中<code>type</code>是对象的类型。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">obj.toString() <span class="comment">// [object Object]</span></span><br></pre></td></tr></table></figure>
+<p>注意，上面提到了<code>如果此方法在自定义对象中未被覆盖</code>，<code>toString</code>才会达到预想的效果，事实上，大部分引用类型比如<code>Array、Date、RegExp</code>等都重写了<code>toString</code>方法。</p>
+<p>我们可以直接调用<code>Object</code>原型上未被覆盖的<code>toString()</code>方法，使用<code>call</code>来改变<code>this</code>指向来达到我们想要的效果。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfrw023janj30su0q0ah3.jpg" alt></p>
+<h3 id="8-4-jquery"><a href="#8-4-jquery" class="headerlink" title="8.4 jquery"></a>8.4 jquery</h3><p>我们来看看<code>jquery</code>源码中如何进行类型判断：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> class2type = &#123;&#125;;</span><br><span class="line">jQuery.each( <span class="string">"Boolean Number String Function Array Date RegExp Object Error Symbol"</span>.split( <span class="string">" "</span> ),</span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"> i, name </span>) </span>&#123;</span><br><span class="line">	class2type[ <span class="string">"[object "</span> + name + <span class="string">"]"</span> ] = name.toLowerCase();</span><br><span class="line">&#125; );</span><br><span class="line"></span><br><span class="line">type: <span class="function"><span class="keyword">function</span>(<span class="params"> obj </span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( obj == <span class="literal">null</span> ) &#123;</span><br><span class="line">		<span class="keyword">return</span> obj + <span class="string">""</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">typeof</span> obj === <span class="string">"object"</span> || <span class="keyword">typeof</span> obj === <span class="string">"function"</span> ?</span><br><span class="line">		class2type[<span class="built_in">Object</span>.prototype.toString.call(obj) ] || <span class="string">"object"</span> :</span><br><span class="line">		<span class="keyword">typeof</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">isFunction: <span class="function"><span class="keyword">function</span>(<span class="params"> obj </span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> jQuery.type(obj) === <span class="string">"function"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原始类型直接使用<code>typeof</code>，引用类型使用<code>Object.prototype.toString.call</code>取得类型，借助一个<code>class2type</code>对象将字符串多余的代码过滤掉，例如<code>[object function]</code>将得到<code>array</code>，然后在后面的类型判断，如<code>isFunction</code>直接可以使用<code>jQuery.type(obj) === &quot;function&quot;</code>这样的判断。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.ecma-international.org/ecma-262/9.0/index.html" target="_blank" rel="noopener">http://www.ecma-international.org/ecma-262/9.0/index.html</a></li>
+<li><a href="https://while.dev/articles/explaining-truthy-falsy-null-0-and-undefined-in-typescript/" target="_blank" rel="noopener">https://while.dev/articles/explaining-truthy-falsy-null-0-and-undefined-in-typescript/</a></li>
+<li><a href="https://github.com/mqyqingfeng/Blog/issues/28" target="_blank" rel="noopener">https://github.com/mqyqingfeng/Blog/issues/28</a></li>
+<li><a href="https://juejin.im/post/5bc5c752f265da0a9a399a62" target="_blank" rel="noopener">https://juejin.im/post/5bc5c752f265da0a9a399a62</a></li>
+<li><a href="https://juejin.im/post/5bbda2b36fb9a05cfd27f55e" target="_blank" rel="noopener">https://juejin.im/post/5bbda2b36fb9a05cfd27f55e</a></li>
+<li>《JS高级程序设计》</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>希望你阅读本篇文章后可以达到以下几点：</p>
+<ul>
+<li>了解<code>JavaScript</code>中的变量在内存中的具体存储形式，可对应实际场景</li>
+<li>搞懂小数计算不精确的底层原因</li>
+<li>了解可能发生隐式类型转换的场景以及转换原则</li>
+<li>掌握判断<code>JavaScript</code>数据类型的方式和底层原理</li>
+</ul>
+<p>文中如有错误，欢迎在评论区指正，如果这篇文章帮助到了你，欢迎点赞和关注。</p>
+<p>#学习/前端</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/29/hooks/" rel="prev" title="hooks 已经到来">
+      <i class="fa fa-chevron-left"></i> hooks 已经到来
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/29/react-and-vue/" rel="next" title="React & Vue 对比">
+      React & Vue 对比 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类型转换"><span class="nav-number">1.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型"><span class="nav-number">1.1.</span> <span class="nav-text">引用类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-包装类型"><span class="nav-number">1.1.1.</span> <span class="nav-text">6.1 包装类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-装箱和拆箱"><span class="nav-number">1.1.2.</span> <span class="nav-text">6.2 装箱和拆箱</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、类型转换"><span class="nav-number">1.2.</span> <span class="nav-text">七、类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-类型转换规则"><span class="nav-number">1.2.1.</span> <span class="nav-text">7.1 类型转换规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-if语句和逻辑语句"><span class="nav-number">1.2.2.</span> <span class="nav-text">7.2 if语句和逻辑语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-各种运数学算符"><span class="nav-number">1.2.3.</span> <span class="nav-text">7.3 各种运数学算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4"><span class="nav-number">1.2.4.</span> <span class="nav-text">7.4 ==</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-一道有意思的面试题"><span class="nav-number">1.2.5.</span> <span class="nav-text">7.5 一道有意思的面试题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、判断JavaScript数据类型的方式"><span class="nav-number">1.3.</span> <span class="nav-text">八、判断JavaScript数据类型的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-typeof"><span class="nav-number">1.3.1.</span> <span class="nav-text">8.1 typeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-instanceof"><span class="nav-number">1.3.2.</span> <span class="nav-text">8.2 instanceof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-toString"><span class="nav-number">1.3.3.</span> <span class="nav-text">8.3 toString</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-jquery"><span class="nav-number">1.3.4.</span> <span class="nav-text">8.4 jquery</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.4.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.5.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">grootfish</p>
+  <div class="site-description" itemprop="description">just record</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">grootfish</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
